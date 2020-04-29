@@ -1,4 +1,7 @@
-﻿using System;
+﻿using HeatChargingSystem.api;
+using HeatChargingSystem.model.request;
+using HeatChargingSystem.model.response;
+using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
@@ -90,44 +93,29 @@ namespace HeatChargingSystem.model
                   flag = -2;
                   return flag;
               }
-             if (string.IsNullOrEmpty(this.userPassword))
-             {
-                 flag = -3;
-                 return flag;
-             }
-                //正则表达式
-            //var r = new System.Text.RegularExpressions.Regex(@"\-");
-            //if (r.IsMatch(this.userPassword)||r.IsMatch(this.userName))
-            //{
-            //    flag = -4;
-            //    return flag;
-            //}
-
-           ////验证登录
-           //  if (null == dicUser.Keys.FirstOrDefault(u=>u==this.userName))
-           //  {
-           //      flag = -5;
-           //  }
-           //  else
-           //  {
-           //      var userInfo = dicUser.FirstOrDefault(u => u.Key == this.userName && u.Value == this.userPassword);
-           //      if (userInfo.Key != null && userInfo.Value!=null)
-           //      {
-           //          userID = 100;
-           //          Console.Write(userInfo.Key + userInfo.Value);
-           //          //int id = userInfo.ID;
-           //          flag = 1;
-           //          //休眠1.5秒
-                     System.Threading.Thread.Sleep(1500);
-           //      }
-           //      else
-           //      {
-           //          flag = -6;
-           //      }
-           //  }
-             flag = 1;
-
-            }catch (Exception)
+                if (string.IsNullOrEmpty(this.userPassword))
+                {
+                    flag = -3;
+                    return flag;
+                }
+                else
+                {
+                    RequestLoginModel request = new RequestLoginModel();
+                    request.account = this.userName;
+                    request.password = this.userPassword;
+                    ResponseTokenModel response = new ApiImpl().Login(request);
+                    if (response != null)
+                    {
+                        flag = 1;
+                    }
+                    else
+                        flag = -6;
+                    System.Threading.Thread.Sleep(1500);
+                }
+                //flag = 1;
+                //System.Threading.Thread.Sleep(1500);
+            }
+            catch (Exception)
             {
                 flag= -1;
                 //出现错误无视
