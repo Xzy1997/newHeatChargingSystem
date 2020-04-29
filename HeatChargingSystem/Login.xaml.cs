@@ -87,24 +87,29 @@ namespace HeatChargingSystem
                     break;
                 case -1:
                     System.Windows.MessageBox.Show("数据库未连接！", "系统提示", System.Windows.MessageBoxButton.OK, System.Windows.MessageBoxImage.Error);
+                    ButtonHelper.SetIsWaiting(this.LoginBtn, false);
                     break;
                 case -2:
                     System.Windows.MessageBox.Show("用户名不能为空！", "系统提示", System.Windows.MessageBoxButton.OK, System.Windows.MessageBoxImage.Information);
+                    ButtonHelper.SetIsWaiting(this.LoginBtn, false);
                     break;
                 case -3:
                     System.Windows.MessageBox.Show("密码不能为空！", "系统提示", System.Windows.MessageBoxButton.OK, System.Windows.MessageBoxImage.Information);
+                    ButtonHelper.SetIsWaiting(this.LoginBtn, false);
                     break;
                 case -4:
                     System.Windows.MessageBox.Show("密码含有特殊字符！", "系统提示", System.Windows.MessageBoxButton.OK, System.Windows.MessageBoxImage.Information);
                     break;
-                case -5:
-                    System.Windows.MessageBox.Show("用户名不正确！", "系统提示", System.Windows.MessageBoxButton.OK, System.Windows.MessageBoxImage.Information);
-                    break;
+                //case -5:
+                //    System.Windows.MessageBox.Show("用户名不正确！", "系统提示", System.Windows.MessageBoxButton.OK, System.Windows.MessageBoxImage.Information);
+                //    break;
                 case -6:
-                    System.Windows.MessageBox.Show("密码不正确！", "系统提示", System.Windows.MessageBoxButton.OK, System.Windows.MessageBoxImage.Information);
+                    System.Windows.MessageBox.Show("用户名或密码不正确！", "系统提示", System.Windows.MessageBoxButton.OK, System.Windows.MessageBoxImage.Information);
+                    ButtonHelper.SetIsWaiting(this.LoginBtn, false);
                     break;
                 default:
                     MessageBox.Show("未知错误！", "系统提示", MessageBoxButton.OK, MessageBoxImage.Error);
+                    ButtonHelper.SetIsWaiting(this.LoginBtn, false);
                     break;
             }
         }

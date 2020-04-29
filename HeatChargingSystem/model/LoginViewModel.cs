@@ -103,6 +103,7 @@ namespace HeatChargingSystem.model
                     RequestLoginModel request = new RequestLoginModel();
                     request.account = this.userName;
                     request.password = this.userPassword;
+
                     ResponseTokenModel response = new ApiImpl().Login(request);
                     if (response != null)
                     {
@@ -114,6 +115,7 @@ namespace HeatChargingSystem.model
                 }
                 //flag = 1;
                 //System.Threading.Thread.Sleep(1500);
+                //Console.WriteLine(this.userName + this.userPassword);
             }
             catch (Exception)
             {
