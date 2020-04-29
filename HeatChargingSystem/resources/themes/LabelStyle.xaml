@@ -1,0 +1,13 @@
+﻿<ResourceDictionary xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+                    xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+                    xmlns:local="clr-namespace:HeatChargingSystem.resources.themes">
+    <ResourceDictionary.MergedDictionaries>
+        <ResourceDictionary Source="pack://application:,,,/Resources/Resource.xaml" />
+    </ResourceDictionary.MergedDictionaries>
+    <Style TargetType="Label">
+        <Setter Property="Foreground" Value="#333333"/>
+        <Setter Property="FontFamily" Value="{StaticResource Default_FontFamily}"/>
+        <Setter Property="FontSize" Value="{StaticResource Default_FontSize}"/>
+        <Setter Property="Padding" Value="0"/>
+    </Style>
+</ResourceDictionary>

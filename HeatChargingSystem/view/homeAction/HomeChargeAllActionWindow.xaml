@@ -1,0 +1,114 @@
+﻿<pu:WindowX  x:Class="HeatChargingSystem.view.homeAction.HomeChargeAllActionWindow"
+       xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+        xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+        xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+        xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+        xmlns:local="clr-namespace:HeatChargingSystem.view"
+        xmlns:pu="clr-namespace:Panuon.UI.Silver;assembly=Panuon.UI.Silver"
+        pu:WindowStartupLocation="CenterScreen"
+        Style="{StaticResource DialogWindow}"
+        mc:Ignorable="d"
+        Title="HomeChargeAllActionWindow"
+        Height="800" Width="1200"
+        MinHeight="800" MinWidth="1200">
+    <pu:WindowXCaption.Header>
+        <Grid>
+            <TextBlock FontSize="14"
+                       FontWeight="Regular"
+                       VerticalAlignment="Center"
+                       Margin="20,0,0,0"
+                       Foreground="#333333"
+                       Text="缴费统计" />
+        </Grid>
+    </pu:WindowXCaption.Header>
+    <Grid>
+        <Grid.RowDefinitions>
+            <RowDefinition Height="56"></RowDefinition>
+            <RowDefinition Height="56"></RowDefinition>
+            <RowDefinition Height="56"></RowDefinition>
+            <RowDefinition Height="20"></RowDefinition>
+            <RowDefinition Height="53"></RowDefinition>
+            <RowDefinition Height="*"></RowDefinition>
+            <RowDefinition Height="40"></RowDefinition>
+        </Grid.RowDefinitions>
+        <Grid Grid.Row="0">
+            <StackPanel Orientation="Horizontal"  Height="36" VerticalAlignment="Bottom">
+                <Label Width="57" Height="18" Margin="25 0 0 0"  Content="地址选择"></Label>
+                <ComboBox Width="140" Height="36" Margin="10 0 0 0" pu:ComboBoxHelper.Watermark="选择省份/地区" pu:ComboBoxHelper.CornerRadius="4"></ComboBox>
+                <ComboBox Width="100" Height="36" Margin="10 0 0 0" pu:ComboBoxHelper.Watermark="选择城市" pu:ComboBoxHelper.CornerRadius="4"></ComboBox>
+                <ComboBox Width="126" Height="36" Margin="10 0 0 0" pu:ComboBoxHelper.Watermark="选择区/县" pu:ComboBoxHelper.CornerRadius="4"></ComboBox>
+                <ComboBox Width="140" Height="36" Margin="10 0 0 0" pu:ComboBoxHelper.Watermark="选择街道" pu:ComboBoxHelper.CornerRadius="4"></ComboBox>
+                <ComboBox Width="140" Height="36" Margin="10 0 0 0" pu:ComboBoxHelper.Watermark="选择小区" pu:ComboBoxHelper.CornerRadius="4"></ComboBox>
+                <ComboBox Width="100" Height="36" Margin="10 0 0 0" pu:ComboBoxHelper.Watermark="楼号" pu:ComboBoxHelper.CornerRadius="4"></ComboBox>
+                <ComboBox Width="126" Height="36" Margin="10 0 0 0" pu:ComboBoxHelper.Watermark="单元" pu:ComboBoxHelper.CornerRadius="4"></ComboBox>
+                <ComboBox Width="100" Height="36" Margin="10 0 0 0" pu:ComboBoxHelper.Watermark="室号" pu:ComboBoxHelper.CornerRadius="4"></ComboBox>
+
+            </StackPanel>
+        </Grid>
+        <Grid Grid.Row="1">
+            <StackPanel Orientation="Horizontal" VerticalAlignment="Bottom"  Height="36">
+                <Label Width="71" Height="18" Margin="25 0 0 0" Content="阀门序列号"></Label>
+                <TextBox Width="140" Height="30" Margin="11 0 0 0"></TextBox>
+                <Label Width="41" Height="18" Margin="19 0 0 0" Content="供热站"></Label>
+                <ComboBox Width="140" Height="30" Margin="10 0 0 0"></ComboBox>
+                <Label Width="57" Height="18" Margin="19 0 0 0" Content="缴费状态"></Label>
+                <ComboBox Width="140" Height="30" Margin="10 0 0 0" ></ComboBox>
+                <Button Margin="36 0 0 0" Width="100" Height="36" Content="确定" Click="SearchChargeAllInfoEvent" Background="#125AD9"></Button>
+            </StackPanel>
+        </Grid>
+        <Grid Grid.Row="2">
+            <StackPanel Orientation="Horizontal" VerticalAlignment="Bottom"  Height="36">
+                <Label Width="56" Height="18" Margin="24 0 0 0" Content="开始时间"></Label>
+                <pu:DateTimePicker Width="200" Height="36" Margin="15 0 0 0" ></pu:DateTimePicker>
+                <Label Width="56" Height="18" Margin="16 0 0 0" Content="结束时间"></Label>
+                <pu:DateTimePicker Width="200" Height="36" Margin="12 0 0 0" ></pu:DateTimePicker>
+            </StackPanel>
+        </Grid>
+        <Grid Grid.Row="3">
+            <Border BorderBrush="#E5E5E5" BorderThickness="0 0 0 1" IsEnabled="False"></Border>
+        </Grid>
+        <Grid Grid.Row="4">
+            <StackPanel Orientation="Horizontal" VerticalAlignment="Bottom"  >
+                <Button Margin="26 0 0 0" Width="104" Height="30" Content="编辑缴费信息" Click="EditChargeInfoEvent"  pu:ButtonHelper.ClickStyle="Sink" pu:ButtonHelper.HoverBrush="#125AD9"	 pu:ButtonHelper.ButtonStyle="Hollow" ></Button>
+                <Button Margin="14 0 0 0" Width="104" Height="30" Content="打印缴费信息" Click="PrintChargeInfoEvent" pu:ButtonHelper.ClickStyle="Sink" pu:ButtonHelper.HoverBrush="#125AD9"	 pu:ButtonHelper.ButtonStyle="Hollow"></Button>
+                <Button Margin="14 0 0 0" Width="104" Height="30" Content="打印用户信息" Click="PringtUserInfoEvent" pu:ButtonHelper.ClickStyle="Sink" pu:ButtonHelper.HoverBrush="#125AD9"	 pu:ButtonHelper.ButtonStyle="Hollow" ></Button>
+            </StackPanel>
+        </Grid>
+        <Grid Grid.Row="5">
+            <Grid.ColumnDefinitions>
+                <ColumnDefinition Width="77*"/>
+                <ColumnDefinition Width="1115*"/>
+            </Grid.ColumnDefinitions>
+            <DataGrid x:Name="dataGrid"  ItemsSource="{Binding}" Margin="0 27 0 0"  ColumnHeaderStyle="{StaticResource dataGridHeaderStyle}"
+                               HorizontalScrollBarVisibility="Auto"
+                               VerticalScrollBarVisibility="Auto" Grid.ColumnSpan="2" >
+                <DataGrid.Columns>
+                    <DataGridTextColumn  Width="70"  Header="序号"  Binding="{Binding Name}"/>
+                    <DataGridTextColumn  Width="110" Header="阀门序列号" Binding="{Binding Age}"/>
+                    <DataGridTextColumn  Width="90" Header="用户名"   Binding="{Binding Age}"/>
+                    <DataGridTextColumn  Width="120" Header="网络户号"   Binding="{Binding Pass}"/>
+                    <DataGridTextColumn  Width="110" Header="供热面积"  Binding="{Binding Email}"/>
+                    <DataGridTextColumn  Width="110" Header="阀门开度"   Binding="{Binding Pass}"/>
+                    <DataGridTextColumn  Width="100" Header="供热站"  Binding="{Binding Email}"/>
+                    <DataGridTextColumn  Width="120" Header="用户地址"   Binding="{Binding Pass}"/>
+                    <DataGridTextColumn  Width="80" Header="应收"  Binding="{Binding Email}"/>
+                    <DataGridTextColumn  Width="80" Header="实收"   Binding="{Binding Pass}"/>
+                    <DataGridTextColumn  Width="80" Header="欠费"  Binding="{Binding Email}"/>
+                    <DataGridTextColumn  Width="120" Header="缴费时间"  Binding="{Binding Email}"/>
+                    <DataGridTextColumn  Width="120" Header="缴费状态"   Binding="{Binding Pass}"/>
+
+                </DataGrid.Columns>
+            </DataGrid>
+        </Grid>
+        <Grid Grid.Row="6">
+            <StackPanel Orientation="Horizontal" VerticalAlignment="Center"  >
+                <TextBlock Width="60" Height="18" Margin="33 0 0 0" Text="用户总数:" FontSize="14" ></TextBlock>
+                <TextBlock Width="56" Height="18" Margin="4 0 0 0" Text="100户" FontSize="14" ></TextBlock>
+                <TextBlock Width="75" Height="18" Margin="20 0 0 0" Text="已缴费用户:" FontSize="14" ></TextBlock>
+                <TextBlock Width="56" Height="18" Margin="4 0 0 0" Text="100户" FontSize="14" ></TextBlock>
+                <TextBlock Width="75" Height="18" Margin="20 0 0 0" Text="未缴费用户:" FontSize="14" ></TextBlock>
+                <TextBlock Width="56" Height="18" Margin="4 0 0 0" Text="100户" FontSize="14" ></TextBlock>
+            </StackPanel>
+        </Grid>
+    </Grid>
+</pu:WindowX>

@@ -1,0 +1,11 @@
+﻿<ResourceDictionary xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+                    xmlns:sys="clr-namespace:System;assembly=mscorlib"
+                    xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+                    xmlns:local="clr-namespace:HeatChargingSystem.resources">
+    <FontFamily x:Key="Default_FontFamily">Microsoft YaHei</FontFamily>
+    <sys:Double x:Key="Default_FontSize">14</sys:Double>
+
+
+    <!--Control colors.-->
+    <Color x:Key="ToolTipsBgColor">#374256</Color>
+</ResourceDictionary>
