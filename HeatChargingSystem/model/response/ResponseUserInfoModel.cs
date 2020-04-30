@@ -11,7 +11,13 @@ namespace HeatChargingSystem.model.response
     /// </summary>
     public class ResponseUserInfoModel
     {
-
+        public ResponseUserInfoModel()
+        {
+            id = "1";
+            name = "xzy";
+            controllerCode = "666";
+            pay_status = 0;
+        }
         /// <summary>
         /// C端用户表Id
         /// </summary>
@@ -94,5 +100,18 @@ namespace HeatChargingSystem.model.response
         /// </summary>
         public int pay_status { get; set; }
 
+        public string userPhone { get; set; }
+        public string heatingStations { get; set; }
+    }
+    public class pay_status
+    {
+        public int id {get; set; }
+        public string name { get; set; }
+        public pay_status(int id,string name)
+        {
+            this.id = id;
+            this.name = name;
+
+        }
     }
 }

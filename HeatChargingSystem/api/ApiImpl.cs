@@ -89,7 +89,33 @@ namespace HeatChargingSystem.api
 
         public List<ResponseUserInfoModel> SearchUser(RequestUserModel request)
         {
-            throw new NotImplementedException();
+            string result = HttpUtils.PostRequest(AppConfigMoel.URL + ConstantsValue.HTTP_SEARCH_USER_RUI, JsonConvert.SerializeObject(request));
+            BaseResponseModel responseModel = JsonConvert.DeserializeObject<BaseResponseModel>(result);
+            if (responseModel != null)
+            {
+                if (responseModel.code.Equals("200"))
+                {
+                    try
+                    {
+                        var arrdata = Newtonsoft.Json.Linq.JArray.Parse(responseModel.data.ToString());
+                        List<ResponseUserInfoModel> obj2 = arrdata.ToObject<List<ResponseUserInfoModel>>();
+                       // List<ResponseUserInfoModel> obj2 = new List<ResponseUserInfoModel>();
+                       // obj2.Add(new ResponseUserInfoModel());
+                       // Console.Write(obj2.ToString());
+                        return obj2;
+                    }
+                    catch (Exception e)
+                    {
+                        Log.Error(e.Message);
+                        return null;
+                    }
+                }
+                else
+                {
+                    return null;
+                }
+            }
+            return null;
         }
 
         public BaseResponseModel UpdateUser(ResponseUserInfoModel request)

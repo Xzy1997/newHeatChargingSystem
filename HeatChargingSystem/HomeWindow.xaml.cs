@@ -1,8 +1,14 @@
-﻿using HeatChargingSystem.view;
+﻿using HeatChargingSystem.api;
+using HeatChargingSystem.model.request;
+using HeatChargingSystem.model.response;
+using HeatChargingSystem.view;
 using HeatChargingSystem.view.homeAction;
 using Panuon.UI.Silver;
 using System;
+using System.Collections.Generic;
 using System.Drawing;
+using System.Windows;
+using System.Windows.Documents;
 using System.Windows.Media.Imaging;
 
 namespace HeatChargingSystem
@@ -15,7 +21,20 @@ namespace HeatChargingSystem
         public HomeWindow()
         {
             InitializeComponent();
+            this.Loaded += HomeWindow_Loaded;
         }
+
+        private void HomeWindow_Loaded(object sender, RoutedEventArgs e)
+        {
+            List<pay_status> list = new List<pay_status>();
+            list.Add(new pay_status(0, "未缴费"));
+            list.Add(new pay_status(1, "已经缴费"));
+            list.Add(new pay_status(2, "不需要"));
+            this.status.ItemsSource = list;
+        }
+
+        ResponseUserInfoModel userInfoModel;
+
 
         /// <summary>
         /// 设置读写卡端口
@@ -274,6 +293,24 @@ namespace HeatChargingSystem
             Login window = new Login();
             window.Show();
             this.Close();
+        }
+
+     
+
+        private void search_btn(object sender, System.Windows.RoutedEventArgs e)
+        {
+            var name = this.userName.Text.Trim();
+            var doorid = this.doorId.Text.Trim();
+            var status = this.status.SelectedIndex;
+            RequestUserModel request = new RequestUserModel();
+            request.name = name;
+            request.controllerCode = doorid;
+            request.status = status.ToString();
+            List<ResponseUserInfoModel> response = new ApiImpl().SearchUser(request);
+            if (response != null)
+            {
+                this.dataGrid.ItemsSource = response;
+            }
         }
     }
 }

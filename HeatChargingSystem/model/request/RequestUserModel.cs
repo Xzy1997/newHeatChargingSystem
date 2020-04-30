@@ -14,14 +14,14 @@ namespace HeatChargingSystem.model.request
         /// <summary>
         /// 阀门序列号
         /// </summary>
-        private string controllerCode { get; set; }
+        public string controllerCode { get; set; }
         /// <summary>
         /// 用户名
         /// </summary>
-        private string name { get; set; }
+        public string name { get; set; }
         /// <summary>
         /// 缴费状态
         /// </summary>
-        private string status { get; set; }
+        public string status { get; set; }
     }
 }

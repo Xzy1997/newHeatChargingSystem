@@ -206,16 +206,16 @@
                         <RowDefinition Height="*"></RowDefinition>
                         <RowDefinition Height="*"></RowDefinition>
                     </Grid.RowDefinitions>
-                    <StackPanel Grid.Row="0" Orientation="Horizontal" VerticalAlignment="Center">
+                    <StackPanel x:Name="bind1" Grid.Row="0" Orientation="Horizontal" VerticalAlignment="Center">
                         <Label Margin="26,0,0,0"  VerticalAlignment="Center">阀门序列号</Label>
-                        <TextBox Margin="11,0,0,0" Width="140" Height="30"></TextBox>
+                        <TextBox x:Name="doorId" Margin="11,0,0,0" Width="140" Height="30"  ></TextBox>
                         <Label Margin="20,0,0,0" VerticalAlignment="Center">用户名</Label>
-                        <TextBox Margin="11,0,0,0" Width="140" Height="30"></TextBox>
-                        <Button Margin="20,0,0,0" Width="100" Height="36"  Background="#125AD9" Content="确定"></Button>
+                        <TextBox x:Name="userName" Margin="11,0,0,0" Width="140" Height="30" ></TextBox>
+                        <Button x:Name="search" Margin="20,0,0,0" Width="100" Height="36"  Background="#125AD9" Content="确定" Click="search_btn"></Button>
                     </StackPanel>
-                    <StackPanel Grid.Row="1" Orientation="Horizontal" VerticalAlignment="Center">
+                    <StackPanel x:Name="bind2" Grid.Row="1" Orientation="Horizontal" VerticalAlignment="Center">
                         <Label Margin="26,0,0,0" VerticalAlignment="Center">缴费状态</Label>
-                        <ComboBox Margin="25,0,0,0" Width="140" Height="30" pu:ComboBoxHelper.CornerRadius="4"></ComboBox>
+                        <ComboBox x:Name="status" Margin="25,0,0,0" Width="140" Height="30" pu:ComboBoxHelper.CornerRadius="4" DisplayMemberPath="name" SelectedValuePath="id"/>
                     </StackPanel>
                 </Grid>
                 <StackPanel Grid.Row="1" Orientation="Horizontal" Background="#F5F8FA">
@@ -226,13 +226,13 @@
                     <Button Width="100" Height="30" Click="HomeChargeAllActionEvent"  Style="{StaticResource actionButtonStyle}" pu:IconHelper.Width="30" pu:ButtonHelper.Icon="/resources/imgs/payment_statistics_normal.png" MyIconHleper:ButtonIconHelper.IconOver="/resources/imgs/payment_statistics_pressed.png" Margin="16,0,0,0"   Content="缴费统计"></Button>
                     <Button Width="100" Height="30" Click="HomeCardLogActionEvent"  Style="{StaticResource actionButtonStyle}" pu:IconHelper.Width="30" pu:ButtonHelper.Icon="/resources/imgs/card_log_normal.png" MyIconHleper:ButtonIconHelper.IconOver="/resources/imgs/card_log_pressed.png" Margin="16,0,0,0"   Content="智能卡日志"></Button>
                 </StackPanel>
-                <DataGrid Grid.Row="2" ColumnHeaderStyle="{StaticResource dataGridHeaderStyle}"
+                <DataGrid x:Name="dataGrid" ItemsSource="{Binding ResponseUserInfoModel}" Grid.Row="2" ColumnHeaderStyle="{StaticResource dataGridHeaderStyle}" CanUserAddRows="False"
                                ScrollViewer.HorizontalScrollBarVisibility="Auto"
                                ScrollViewer.VerticalScrollBarVisibility="Auto"
                               pu:DataGridHelper.SelectedBackground="#44B5B5B5"
                               pu:DataGridHelper.HoverBackground="#22B5B5B5" >
                     <DataGrid.Columns>
-                        <DataGridTextColumn Header="序号" Binding="{Binding Name}" >
+                        <DataGridTextColumn Header="序号" Binding="{Binding id}" >
                             <DataGridColumn.HeaderStyle>
                                 <Style TargetType="DataGridColumnHeader" BasedOn="{StaticResource dataGridHeaderStyle}">
                                     <Setter Property="Template">
@@ -255,16 +255,16 @@
                                 </Style>
                             </DataGridColumn.HeaderStyle>
                         </DataGridTextColumn>
-                        <DataGridTextColumn Header="阀门序列号" Binding="{Binding Name}"  />
-                        <DataGridTextColumn Header="用户名" Binding="{Binding UserName}" />
-                        <DataGridTextColumn Header="联系方式" Binding="{Binding UserPhone}"/>
-                        <DataGridTextColumn Header="用户类型" Binding="{Binding UserType}"/>
-                        <DataGridTextColumn Header="阀门类型" Binding="{Binding ValveType}"/>
-                        <DataGridTextColumn Header="供热面积" Binding="{Binding HeatArea}"/>
-                        <DataGridTextColumn Header="阀门开度" Binding="{Binding ValveAperture}"/>
-                        <DataGridTextColumn Header="供热站" Binding="{Binding HeatingStations}"/>
-                        <DataGridTextColumn Header="用户地址" Binding="{Binding UserAddress}"/>
-                        <DataGridTextColumn Header="缴费状态" Binding="{Binding ChargeState}"/>
+                        <DataGridTextColumn Header="阀门序列号" Binding="{Binding controllerCode}"  />
+                        <DataGridTextColumn Header="用户名" Binding="{Binding name}" />
+                        <DataGridTextColumn Header="联系方式" Binding="{Binding userPhone}"/>
+                        <DataGridTextColumn Header="用户类型" Binding="{Binding userType}"/>
+                        <DataGridTextColumn Header="阀门类型" Binding="{Binding controllerType}"/>
+                        <DataGridTextColumn Header="供热面积" Binding="{Binding area}"/>
+                        <DataGridTextColumn Header="阀门开度" Binding="{Binding openPecent}"/>
+                        <DataGridTextColumn Header="供热站" Binding="{Binding heatingStations}"/>
+                        <DataGridTextColumn Header="用户地址" Binding="{Binding address}"/>
+                        <DataGridTextColumn Header="缴费状态" Binding="{Binding pay_status}"/>
                     </DataGrid.Columns>
                 </DataGrid>
             </Grid>
