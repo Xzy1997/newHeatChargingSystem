@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.Drawing;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
@@ -118,6 +119,21 @@ namespace HeatChargingSystem.model.response
             this.dicType = dicType;
             this.dicTypeName = dicTypeName;
             this.id = id;
+            this.name = name;
+        }
+    }
+    public class Region
+    {
+        public string id { get; set; }
+        public string pid { get; set; }
+        public string level { get; set; }
+        public string name { get; set; }
+
+        public Region(string id, string pid, string i, string level, string name)
+        {
+            this.id = id;
+            this.pid = pid;
+            this.level = level;
             this.name = name;
         }
     }

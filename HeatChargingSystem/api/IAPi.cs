@@ -27,7 +27,7 @@ namespace HeatChargingSystem.api
         /// <summary>
         /// 获取国家地区字典表
         /// </summary>
-        List<controller_type> GetRegion(string level, string pid);
+        List<Region> GetRegion(string level, string pid);
         /// <summary>
         /// 获取所有字典信息
         /// </summary>

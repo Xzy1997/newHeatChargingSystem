@@ -67,17 +67,25 @@ namespace HeatChargingSystem.api
             throw new NotImplementedException();
         }
 
-        public List<controller_type> GetRegion( string level,string pid)
+        public List<Region> GetRegion( string level,string pid)
         {
             try
             {
-
-                string result = HttpUtils.GetRequest(AppConfigMoel.URL + ConstantsValue.HTTP_GETD_RUI, AppConfigMoel.token);
-                Console.WriteLine(result);
+                string str = AppConfigMoel.URL + ConstantsValue.HTTP_GETREGION_RUI;
+                str = str + "?level={0}&id={1}";
+                string url = String.Format(str, level, pid);
+                string result = HttpUtils.GetRequest(url, AppConfigMoel.token);
                 BaseResponseModel responseModel = JsonConvert.DeserializeObject<BaseResponseModel>(result);
-                var arrdata = Newtonsoft.Json.Linq.JArray.Parse(responseModel.data.ToString());
-                List<controller_type> obj2 = arrdata.ToObject<List<controller_type>>();
-                return obj2;
+                // string str= "[{'id':3,'sort':1,'pid':2,'level':3,'name':'福州市','code':'01','longCode':'3501','hasParent':false,'hasChildren':false},{'id':4,'sort':1,'pid':3,'level':3,'name':'宁波市','code':'01','longCode':'3501','hasParent':false,'hasChildren':false}]";
+                if (responseModel.data.ToString() != null)
+                {
+                    var arrdata = Newtonsoft.Json.Linq.JArray.Parse(responseModel.data.ToString());
+                    //var arrdata = Newtonsoft.Json.Linq.JArray.Parse(str);
+                    List<Region> obj2 = arrdata.ToObject<List<Region>>();
+                    return obj2;
+                }
+                return null;
+                
             }
             catch (Exception)
             {
