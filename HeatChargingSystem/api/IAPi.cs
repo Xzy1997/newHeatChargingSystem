@@ -31,7 +31,7 @@ namespace HeatChargingSystem.api
         /// <summary>
         /// 获取所有字典信息
         /// </summary>
-        void GetAllDictionary();
+        Dictionary<int, string> GetAllDictionary();
 
         #region 用户操作接口
         /// <summary>

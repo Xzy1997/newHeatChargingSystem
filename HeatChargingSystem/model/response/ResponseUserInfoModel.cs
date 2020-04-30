@@ -11,13 +11,7 @@ namespace HeatChargingSystem.model.response
     /// </summary>
     public class ResponseUserInfoModel
     {
-        public ResponseUserInfoModel()
-        {
-            id = "1";
-            name = "xzy";
-            controllerCode = "666";
-            pay_status = 0;
-        }
+       
         /// <summary>
         /// C端用户表Id
         /// </summary>
@@ -27,8 +21,7 @@ namespace HeatChargingSystem.model.response
         /// </summary>
         public string name { get; set; }
         /// <summary>
-        /// 用户类型
-        /// 1：民用；2商用；3：共建；4：其他类型
+        /// 网络用户
         /// </summary>
         public string hourseCode { get; set; }
         /// <summary>
@@ -100,7 +93,7 @@ namespace HeatChargingSystem.model.response
         /// </summary>
         public int pay_status { get; set; }
 
-        public string userPhone { get; set; }
+        public string phone { get; set; }
         public string heatingStations { get; set; }
     }
     public class pay_status

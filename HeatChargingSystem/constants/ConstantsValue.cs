@@ -40,6 +40,9 @@ namespace HeatChargingSystem.constants
         /// 查询用户URI
         /// </summary>
         public const string HTTP_SEARCH_USER_RUI = "/sys/homeowner/searchHomeowner";
-
+        /// <summary>
+        /// 获取字典
+        /// </summary>
+        public const string HTTP_GETD_RUI = "/sys/dictionary/getDictionary?type=controller_type";
     }
 }

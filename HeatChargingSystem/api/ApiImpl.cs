@@ -23,7 +23,7 @@ namespace HeatChargingSystem.api
         {
             try
             {
-                string result = HttpUtils.PostRequest(AppConfigMoel.URL + ConstantsValue.HTTP_ADD_USER_URI, JsonConvert.SerializeObject(request));
+                string result = HttpUtils.PostRequest(AppConfigMoel.URL + ConstantsValue.HTTP_ADD_USER_URI, JsonConvert.SerializeObject(request),AppConfigMoel.token);
                 BaseResponseModel responseModel = JsonConvert.DeserializeObject<BaseResponseModel>(result);
                 return responseModel;
             }
@@ -39,9 +39,20 @@ namespace HeatChargingSystem.api
             throw new NotImplementedException();
         }
 
-        public void GetAllDictionary()
+        public Dictionary<int, string> GetAllDictionary()
         {
-            throw new NotImplementedException();
+            try
+            {
+                string result = HttpUtils.GetRequest(AppConfigMoel.URL + ConstantsValue.HTTP_GETD_RUI, "UTF8", "UTF8", AppConfigMoel.token);
+                Console.WriteLine(result);
+                Dictionary<int, string> jsonDict = JsonConvert.DeserializeObject<Dictionary<int, string>>(result);               
+                return jsonDict;
+            }
+            catch (Exception)
+            {
+
+                return null;
+            }
         }
 
         public List<ResponseUserInfoModel> GetAllUserList()

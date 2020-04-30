@@ -59,12 +59,28 @@ namespace HeatChargingSystem.view.homeAction
             list.Add(new controllerType1(1, "xx阀"));
             list.Add(new controllerType1(2, "xx阀"));
             this.controllerType.ItemsSource = list;
-            List<userType> list1 = new List<userType>();
-            list1.Add(new userType(0, "民用"));
-            list1.Add(new userType(1, "商用"));
-            list1.Add(new userType(2, "共建"));
-            list1.Add(new userType(3, "其他类型"));
+
+
+            //List<userType> list1 = new List<userType>();
+            //list1.Add(new userType(0, "民用"));
+            //list1.Add(new userType(1, "商用"));
+            //list1.Add(new userType(2, "共建"));
+            //list1.Add(new userType(3, "其他类型"));
+            //this.usertype.ItemsSource = list1;
+            Dictionary<int, string> response = new ApiImpl().GetAllDictionary();
+            List < userType > list1 = new List<userType>();
+            if (response != null)
+            {
+                foreach (var i in response)
+                {
+                    userType x = new userType(i.Key, i.Value);
+                    list1.Add(x);
+                }
+            }
+           
+
             this.usertype.ItemsSource = list1;
+
         }
 
         private void add_btn(object sender, RoutedEventArgs e)
@@ -80,8 +96,8 @@ namespace HeatChargingSystem.view.homeAction
             var room = this.room.Text.Trim();
 
             ResponseUserInfoModel request = new ResponseUserInfoModel();
-            request.id = userId;
-            request.userPhone = phone;
+            request.name = userId;
+            request.phone = phone;
             request.userType = usertype;
             request.area = area;
             request.controllerType = controllerType;
@@ -89,6 +105,13 @@ namespace HeatChargingSystem.view.homeAction
             request.build = build;
             request.unit = unit;
             request.room = room;
+
+            request.hourseCode = "11";
+            request.provice = "11";
+            request.city = "11"; ;
+            request.county = "11"; ;
+            request.street = "11"; ;
+            request.village = "11"; ;
 
             BaseResponseModel response = new ApiImpl().AddUser(request);
             if (response != null)
