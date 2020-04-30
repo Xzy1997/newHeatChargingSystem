@@ -3,7 +3,7 @@
         xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
         xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
         xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
-        xmlns:local="clr-namespace:HeatChargingSystem.view"
+        xmlns:local="clr-namespace:HeatChargingSystem.view.UserControls"
         xmlns:pu="clr-namespace:Panuon.UI.Silver;assembly=Panuon.UI.Silver"
         pu:WindowStartupLocation="CenterScreen"
         Style="{StaticResource DialogWindow}"
@@ -34,29 +34,30 @@
         <Grid Grid.Row="1">
             <StackPanel Orientation="Horizontal"  Height="36">
                 <pu:TextBlockX Width="51" Height="18" Margin="42 0 0 0" MatchText="*"  MatchedForeground="Red" Text="*用户名"  FontSize="14"></pu:TextBlockX>
-                <TextBox Width="280" Height="36" Margin="26 0 0 0" pu:TextBoxHelper.CornerRadius="4"></TextBox>
+                <TextBox x:Name="userId" Width="280" Height="36" Margin="26 0 0 0" pu:TextBoxHelper.CornerRadius="4"></TextBox>
                 <pu:TextBlockX Width="66" Height="18" Margin="35 0 0 0" Text="*联系方式" MatchText="*"  MatchedForeground="Red" FontSize="14"></pu:TextBlockX>
-                <TextBox Width="280" Height="36" Margin="25 0 0 0" pu:TextBoxHelper.CornerRadius="4"></TextBox>
+                <TextBox  x:Name="phone" Width="280" Height="36" Margin="25 0 0 0" pu:TextBoxHelper.CornerRadius="4"></TextBox>
             </StackPanel>
         </Grid>
         <Grid Grid.Row="2">
             <StackPanel Orientation="Horizontal"  Height="36">
                 <pu:TextBlockX Width="66" Height="18" Margin="42 0 0 0" MatchText="*"  MatchedForeground="Red" Text="*用户类型"  FontSize="14"></pu:TextBlockX>
-                <ComboBox Width="280" Height="36" Margin="11 0 0 0" pu:ComboBoxHelper.Watermark="请选择" pu:ComboBoxHelper.CornerRadius="4"></ComboBox>
+                <ComboBox x:Name="usertype" DisplayMemberPath="name" Width="280" Height="36" Margin="11 0 0 0" pu:ComboBoxHelper.Watermark="请选择" pu:ComboBoxHelper.CornerRadius="4"></ComboBox>
                 <pu:TextBlockX Width="66" Height="18" Margin="35 0 0 0" Text="*供热面积" MatchText="*"  MatchedForeground="Red" FontSize="14"></pu:TextBlockX>
-                <TextBox Width="280" Height="36" Margin="25 0 0 0" pu:TextBoxHelper.CornerRadius="4"></TextBox>
+                <TextBox x:Name="area" Width="280" Height="36" Margin="25 0 0 0" pu:TextBoxHelper.CornerRadius="4"></TextBox>
             </StackPanel>
         </Grid>
         <Grid Grid.Row="3">
             <StackPanel Orientation="Horizontal"  Height="36">
                 <pu:TextBlockX Width="66" Height="18" Margin="42 0 0 0" MatchText="*"  MatchedForeground="Red" Text="*阀门类型"  FontSize="14"></pu:TextBlockX>
-                <ComboBox Width="280" Height="36" Margin="11 0 0 0" pu:ComboBoxHelper.Watermark="请选择" pu:ComboBoxHelper.CornerRadius="4"></ComboBox>
+                <ComboBox Name="controllerType"  DisplayMemberPath="name" Width="280" Height="36" Margin="11 0 0 0" pu:ComboBoxHelper.Watermark="请选择" pu:ComboBoxHelper.CornerRadius="4"></ComboBox>
                 <pu:TextBlockX Width="80" Height="18" Margin="35 0 0 0" Text="*阀门序列号" MatchText="*"  MatchedForeground="Red" FontSize="14"></pu:TextBlockX>
-                <TextBox Width="280" Height="36" Margin="11 0 0 0" pu:TextBoxHelper.CornerRadius="4"></TextBox>
+                <TextBox x:Name="controllerCode" Width="280" Height="36" Margin="11 0 0 0" pu:TextBoxHelper.CornerRadius="4"></TextBox>
             </StackPanel>
         </Grid>
         <Grid Grid.Row="4">
             <StackPanel Orientation="Horizontal"  Height="36">
+                <local:DictrictControl x:Name="District" />
                 <pu:TextBlockX Width="66" Height="18" Margin="42 0 0 0" MatchText="*"  MatchedForeground="Red" Text="*所在地区"  FontSize="14"></pu:TextBlockX>
                 <ComboBox Width="140" Height="36" Margin="11 0 0 0" pu:ComboBoxHelper.Watermark="选择省份/地区" pu:ComboBoxHelper.CornerRadius="4"></ComboBox>
                 <ComboBox Width="100" Height="36" Margin="10 0 0 0" pu:ComboBoxHelper.Watermark="选择城市" pu:ComboBoxHelper.CornerRadius="4"></ComboBox>
@@ -69,17 +70,17 @@
             <StackPanel Orientation="Horizontal"  Height="36" VerticalAlignment="Bottom">
                 <pu:TextBlockX Width="66" Height="18" Margin="42 0 0 0" MatchText="*"  MatchedForeground="Red" Text="*详细地址"  FontSize="14"></pu:TextBlockX>
                 <pu:TextBlockX Width="34" Height="18" Margin="11 0 0 0" MatchText="*"  Text="楼号:"  FontSize="14"></pu:TextBlockX>
-                <TextBox BorderThickness="0,0,0,1" Width="106" Height="18" BorderBrush="#CCCCCC"  ></TextBox>
+                <TextBox x:Name="build" BorderThickness="0,0,0,1" Width="106" Height="18" BorderBrush="#CCCCCC"  ></TextBox>
                 <pu:TextBlockX Width="34" Height="18" Margin="9 0 0 0" MatchText="*"  Text="单元:"  FontSize="14"></pu:TextBlockX>
-                <TextBox BorderThickness="0,0,0,1" Width="106" Height="18" BorderBrush="#CCCCCC"  ></TextBox>
+                <TextBox x:Name="unit" BorderThickness="0,0,0,1" Width="106" Height="18" BorderBrush="#CCCCCC"  ></TextBox>
                 <pu:TextBlockX Width="34" Height="18" Margin="7 0 0 0" MatchText="*"  Text="室号:"  FontSize="14"></pu:TextBlockX>
-                <TextBox BorderThickness="0,0,0,1" Width="106" Height="18" BorderBrush="#CCCCCC"  ></TextBox>
+                <TextBox x:Name="room" BorderThickness="0,0,0,1" Width="106" Height="18" BorderBrush="#CCCCCC"  ></TextBox>
             </StackPanel>
         </Grid>
         <Grid Grid.Row="6">
             <StackPanel Orientation="Horizontal"  Height="36" VerticalAlignment="Center" HorizontalAlignment="Center">
-                <Button Margin="36 0 0 0" Width="100" Height="36" Content="确定" Background="#125AD9"></Button>
-                <Button Margin="36 0 0 0" Width="100" Height="36" Content="取消" pu:ButtonHelper.ButtonStyle="Outline"></Button>
+                <Button Margin="36 0 0 0" Width="100" Height="36" Content="确定" Background="#125AD9" Click="add_btn"></Button>
+                <Button Margin="36 0 0 0" Width="100" Height="36" Content="取消" pu:ButtonHelper.ButtonStyle="Outline" Click="exit"></Button>
             </StackPanel>
         </Grid>
     </Grid>

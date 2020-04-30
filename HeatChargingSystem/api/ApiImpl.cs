@@ -21,7 +21,17 @@ namespace HeatChargingSystem.api
 
         public BaseResponseModel AddUser(ResponseUserInfoModel request)
         {
-            throw new NotImplementedException();
+            try
+            {
+                string result = HttpUtils.PostRequest(AppConfigMoel.URL + ConstantsValue.HTTP_ADD_USER_URI, JsonConvert.SerializeObject(request));
+                BaseResponseModel responseModel = JsonConvert.DeserializeObject<BaseResponseModel>(result);
+                return responseModel;
+            }
+            catch (Exception)
+            {
+
+                throw;
+            }                      
         }
 
         public BaseResponseModel DelUser(string[] ids)
@@ -56,24 +66,28 @@ namespace HeatChargingSystem.api
 
         public ResponseTokenModel Login(RequestLoginModel request)
         {
-            string result = HttpUtils.PostRequest(AppConfigMoel.URL + ConstantsValue.HTTP_LOGIN_URI, JsonConvert.SerializeObject(request));
-            BaseResponseModel responseModel = JsonConvert.DeserializeObject<BaseResponseModel>(result);
-            if (responseModel.code.Equals("200"))
+            try
             {
-                try
+                string result = HttpUtils.PostRequest(AppConfigMoel.URL + ConstantsValue.HTTP_LOGIN_URI, JsonConvert.SerializeObject(request));
+                BaseResponseModel responseModel = JsonConvert.DeserializeObject<BaseResponseModel>(result);
+                if (responseModel != null)
                 {
-                    ResponseTokenModel response = JsonConvert.DeserializeObject<ResponseTokenModel>(responseModel.data.ToString());
-                    return response;
+                    if (responseModel.code.Equals("200"))
+                    {
+                        ResponseTokenModel response = JsonConvert.DeserializeObject<ResponseTokenModel>(responseModel.data.ToString());
+                        return response;
+                    }
+                    else
+                    {
+                        return null;
+                    }
                 }
-                catch (Exception e)
-                {
-                    Log.Error(e.Message);
-                    return null;
-                }
-            }
-            else
-            {
                 return null;
+            }
+            catch (Exception)
+            {
+
+                throw;
             }
         }
 
@@ -89,33 +103,34 @@ namespace HeatChargingSystem.api
 
         public List<ResponseUserInfoModel> SearchUser(RequestUserModel request)
         {
-            string result = HttpUtils.PostRequest(AppConfigMoel.URL + ConstantsValue.HTTP_SEARCH_USER_RUI, JsonConvert.SerializeObject(request));
-            BaseResponseModel responseModel = JsonConvert.DeserializeObject<BaseResponseModel>(result);
-            if (responseModel != null)
+            try
             {
-                if (responseModel.code.Equals("200"))
+                string result = HttpUtils.PostRequest(AppConfigMoel.URL + ConstantsValue.HTTP_SEARCH_USER_RUI, JsonConvert.SerializeObject(request));
+                BaseResponseModel responseModel = JsonConvert.DeserializeObject<BaseResponseModel>(result);
+                if (responseModel != null)
                 {
-                    try
+                    if (responseModel.code.Equals("200"))
                     {
                         var arrdata = Newtonsoft.Json.Linq.JArray.Parse(responseModel.data.ToString());
                         List<ResponseUserInfoModel> obj2 = arrdata.ToObject<List<ResponseUserInfoModel>>();
-                       // List<ResponseUserInfoModel> obj2 = new List<ResponseUserInfoModel>();
-                       // obj2.Add(new ResponseUserInfoModel());
-                       // Console.Write(obj2.ToString());
+                        // List<ResponseUserInfoModel> obj2 = new List<ResponseUserInfoModel>();
+                        // obj2.Add(new ResponseUserInfoModel());
+                        Console.Write("11");
                         return obj2;
                     }
-                    catch (Exception e)
+                    else
                     {
-                        Log.Error(e.Message);
                         return null;
                     }
                 }
-                else
-                {
-                    return null;
-                }
+                return null;
             }
-            return null;
+            catch (Exception)
+            {
+
+                throw;
+            }
+
         }
 
         public BaseResponseModel UpdateUser(ResponseUserInfoModel request)

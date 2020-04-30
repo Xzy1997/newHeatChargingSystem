@@ -309,8 +309,11 @@ namespace HeatChargingSystem
             List<ResponseUserInfoModel> response = new ApiImpl().SearchUser(request);
             if (response != null)
             {
-                this.dataGrid.ItemsSource = response;
+            System.Windows.MessageBox.Show(response.ToString(), "系统提示", System.Windows.MessageBoxButton.OK, System.Windows.MessageBoxImage.Information);
+            this.dataGrid.ItemsSource = response;
             }
+            else
+                System.Windows.MessageBox.Show("无数据", "系统提示", System.Windows.MessageBoxButton.OK, System.Windows.MessageBoxImage.Information);
         }
     }
 }
