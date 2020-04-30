@@ -1,4 +1,6 @@
-﻿using Newtonsoft.Json.Linq;
+﻿using HeatChargingSystem.api;
+using HeatChargingSystem.model.response;
+using Newtonsoft.Json.Linq;
 using System;
 using System.Collections;
 using System.Collections.Generic;
@@ -28,11 +30,7 @@ namespace HeatChargingSystem.view.UserControls
         {
             InitializeComponent();
         }
-        public string Path
-        {
-            get;
-            set;
-        }
+
        
         
         private string _province;
@@ -40,11 +38,7 @@ namespace HeatChargingSystem.view.UserControls
         {
             get
             {
-                if (com_province.SelectedValue == null)
-                    return null;
-                JProperty o = (JProperty)com_province.SelectedValue;
-                JToken j = (JValue)o.Value[0];
-                return j.ToString();
+                return _province;
             }
             set { _province = value; }
         }
@@ -54,11 +48,7 @@ namespace HeatChargingSystem.view.UserControls
         {
             get
             {
-                if (com_city.SelectedValue == null)
-                    return null;
-                JProperty o = (JProperty)com_city.SelectedValue;
-                JToken j = (JValue)o.Value[0];
-                return j.ToString();
+                return _city;
 
             }
             set {  _city=value; }
@@ -69,11 +59,7 @@ namespace HeatChargingSystem.view.UserControls
         {
             get
             {
-                if (com_county.SelectedValue == null)
-                    return null;
-                JProperty o = (JProperty)com_county.SelectedValue;
-                JToken j = (JValue)o.Value[0];
-                return j.ToString();
+                return _county;
             }
             set { _county=value; }
         }
@@ -91,150 +77,69 @@ namespace HeatChargingSystem.view.UserControls
         public static ArrayList county = new ArrayList();
 
         public static JObject district;
-        public void GrertDic()
+ 
+        public void GrertDic1()
         {
-            string DomaingPath = System.AppDomain.CurrentDomain.BaseDirectory;
-            string path = DomaingPath + "District.json";
-            this.Path = path;
-            if (File.Exists(path))
-            {
-                string jsonText = ReadFileUnicode();
-                JObject jo = JObject.Parse(jsonText.Substring(1, jsonText.Length - 1));
+            //获取省级列表
+            // List<controller_type> response = new ApiImpl().GetRegion("1","123");
 
-                district = jo;
-
-
-                foreach (JProperty p in jo.Children())
-                {
-                    if (p.Name.ToString().Substring(2, 4) == "0000")
-                    {
-
-                        province.Add(p);
-                    }
-
-                }
-            }
-        }
-
-
-        public string ReadFileUnicode()
-        {
-            FileStream fs = new FileStream(Path, FileMode.Open, FileAccess.Read, FileShare.Read);
-
-            byte[] data = new byte[fs.Length];
-
-            fs.Read(data, 0, data.Length);
-            fs.Close();
-            return System.Text.Encoding.Unicode.GetString(data);
+            province.Add(new struct1("0","浙江"));
         }
 
         private void com_province_SelectionChanged_1(object sender, SelectionChangedEventArgs e)
         {
 
-            city.Clear();
-            county.Clear();
-            if (com_province.SelectedValue == null)
-                return;
-            JProperty jp = (JProperty)com_province.SelectedValue;
-            string id = jp.Name.Substring(0, 2);
+            //city.Clear();
+            //county.Clear();
+            //if (com_province.SelectedValue == null)
+            //    return;
+            //JProperty jp = (JProperty)com_province.SelectedValue;
+            //string id = jp.Name.Substring(0, 2);
 
-            ProvinceID = id;
+            //ProvinceID = id;
 
-            foreach (JProperty p in district.Children())
-            {
-                if (p.Name.ToString().Substring(0, 2) == id && p.Name.ToString().Substring(4, 2) == "00" && p.Name.ToString().Substring(2, 2) != "00")
-                {
+            ////获取城市列表
+            //com_city.ItemsSource = null;
 
-                    city.Add(p);
-                }
-
-            }
-            com_city.ItemsSource = null;
-
-            com_city.ItemsSource = city;
-            com_city.SelectedIndex = 0;
+            //com_city.ItemsSource = city;
+            //com_city.SelectedIndex = 0;
         }
 
         private void com_city_SelectionChanged_1(object sender, SelectionChangedEventArgs e)
         {
-            county.Clear();
-            if (com_city.SelectedValue == null)
-                return;
-            JProperty jp = (JProperty)com_city.SelectedValue;
-            string id = jp.Name.Substring(2, 2);
+            //county.Clear();
+            //if (com_city.SelectedValue == null)
+            //    return;
+            //JProperty jp = (JProperty)com_city.SelectedValue;
+            //string id = jp.Name.Substring(2, 2);
 
 
-            foreach (JProperty p in district.Children())
-            {
-                 if (p.Name.ToString().Substring(0, 2) == ProvinceID && p.Name.ToString().Substring(2, 2) == id && p.Name.ToString().Substring(4, 2)!="00")
-                {
-
-                    county.Add(p);
-                }
-
-            }
-            com_county.ItemsSource = null;
-            com_county.ItemsSource = county;
-            com_county.SelectedIndex = 0;
+            ////获取区/县列表
+            //com_county.ItemsSource = null;
+            //com_county.ItemsSource = county;
+            //com_county.SelectedIndex = 0;
         }
 
         private void UserControl_Loaded_1(object sender, RoutedEventArgs e)
         {
-            GrertDic();
-
+          //  GrertDic();
+            GrertDic1();
 
             com_province.ItemsSource = province;
-
-
-            foreach (JProperty jp in province)
-            {
-                JToken j = (JValue)jp.Value[0];
-                if (j.ToString() == _province)
-                {
-                    com_province.Text = jp.ToString();
-                }
-            }
-            foreach (JProperty jp in city)
-            {
-                JToken j = (JValue)jp.Value[0];
-                if (j.ToString() == _city)
-                {
-                    com_city.Text = jp.ToString();
-                }
-            }
-
-            foreach (JProperty jp in county)
-            {
-                JToken j = (JValue)jp.Value[0];
-                if (j.ToString() == _county)
-                {
-                    com_county.Text = jp.ToString();
-                }
-            }
+            com_city.ItemsSource = province;
+            com_county.ItemsSource = county;
 
         }
 
     }
-    public class DictrictConverter : IValueConverter
+    public class struct1
     {
-
-        public object Convert(object value, Type targetType, object parameter, CultureInfo culture)
+        public string id{ get; set; }
+        public string name { get; set; }
+        public struct1(string id, string name)
         {
-
-            if (!(value is JProperty))
-                return "";
-
-            JProperty o = (JProperty)value;
-
-
-
-            return o.Value[0];
-
-
-        }
-        public object ConvertBack(object value, Type targetType, object parameter, CultureInfo culture)
-        {
-            throw new NotImplementedException();
+            this.id = id;
+            this.name = name;
         }
     }
 }

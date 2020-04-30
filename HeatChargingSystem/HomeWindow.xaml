@@ -226,7 +226,7 @@
                     <Button Width="100" Height="30" Click="HomeChargeAllActionEvent"  Style="{StaticResource actionButtonStyle}" pu:IconHelper.Width="30" pu:ButtonHelper.Icon="/resources/imgs/payment_statistics_normal.png" MyIconHleper:ButtonIconHelper.IconOver="/resources/imgs/payment_statistics_pressed.png" Margin="16,0,0,0"   Content="缴费统计"></Button>
                     <Button Width="100" Height="30" Click="HomeCardLogActionEvent"  Style="{StaticResource actionButtonStyle}" pu:IconHelper.Width="30" pu:ButtonHelper.Icon="/resources/imgs/card_log_normal.png" MyIconHleper:ButtonIconHelper.IconOver="/resources/imgs/card_log_pressed.png" Margin="16,0,0,0"   Content="智能卡日志"></Button>
                 </StackPanel>
-                <DataGrid x:Name="dataGrid" ItemsSource="{Binding ResponseUserInfoModel}" Grid.Row="2" ColumnHeaderStyle="{StaticResource dataGridHeaderStyle}" CanUserAddRows="False"
+                <DataGrid x:Name="dataGrid"  ItemsSource="{Binding}"  Grid.Row="2" ColumnHeaderStyle="{StaticResource dataGridHeaderStyle}" CanUserAddRows="False" AutoGenerateColumns="False"
                                ScrollViewer.HorizontalScrollBarVisibility="Auto"
                                ScrollViewer.VerticalScrollBarVisibility="Auto"
                               pu:DataGridHelper.SelectedBackground="#44B5B5B5"

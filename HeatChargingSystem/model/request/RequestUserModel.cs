@@ -11,6 +11,12 @@ namespace HeatChargingSystem.model.request
     /// </summary>
     public class RequestUserModel
     {
+        public RequestUserModel()
+        {
+            controllerCode = "";
+            name = "";
+            status = "";
+        }
         /// <summary>
         /// 阀门序列号
         /// </summary>

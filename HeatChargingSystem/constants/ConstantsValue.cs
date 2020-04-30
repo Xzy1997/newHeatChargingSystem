@@ -44,5 +44,11 @@ namespace HeatChargingSystem.constants
         /// 获取字典
         /// </summary>
         public const string HTTP_GETD_RUI = "/sys/dictionary/getDictionary?type=controller_type";
+
+        /// <summary>
+        /// 获取字典
+        /// </summary>
+        /// 
+        public const string HTTP_GETREGION_RUI = "/sys/region/getRegion";
     }
 }

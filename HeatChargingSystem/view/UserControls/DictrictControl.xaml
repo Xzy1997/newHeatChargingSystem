@@ -4,53 +4,47 @@
              xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006" 
              xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
              xmlns:local="clr-namespace:HeatChargingSystem.view.UserControls"
+             xmlns:pu="clr-namespace:Panuon.UI.Silver;assembly=Panuon.UI.Silver"
              mc:Ignorable="d" 
-             d:DesignHeight="60" d:DesignWidth="400" Loaded="UserControl_Loaded_1">
-    <UserControl.Resources>
-        <local:DictrictConverter x:Key="dataConverter" />
-    </UserControl.Resources>
+             d:DesignHeight="60" d:DesignWidth="847" Loaded="UserControl_Loaded_1">
+
     <Grid>
-        <Grid.ColumnDefinitions>
-            <ColumnDefinition></ColumnDefinition>
-            <ColumnDefinition></ColumnDefinition>
-            <ColumnDefinition></ColumnDefinition>
-        </Grid.ColumnDefinitions>
         <Grid.RowDefinitions>
             <RowDefinition></RowDefinition>
-            <RowDefinition></RowDefinition>
         </Grid.RowDefinitions>
-        <ComboBox Grid.Column="0" Grid.Row="0" SelectionChanged="com_province_SelectionChanged_1"  Canvas.Left="55" Margin="0" Canvas.Top="246" Width="120" Name="com_province">
-            <ComboBox.ItemTemplate >
-                <DataTemplate>
-                    <TextBlock  Text="{Binding Converter={StaticResource dataConverter}}"></TextBlock>
-                </DataTemplate>
-            </ComboBox.ItemTemplate>
-        </ComboBox>
-        <ComboBox Grid.Column="1" Grid.Row="0" SelectionChanged="com_city_SelectionChanged_1"  Canvas.Left="55" Margin="0" Canvas.Top="246" Width="120" Name="com_city">
-            <ComboBox.ItemTemplate >
-                <DataTemplate>
-                    <TextBlock  Text="{Binding Converter={StaticResource dataConverter}}"></TextBlock>
-                </DataTemplate>
-            </ComboBox.ItemTemplate>
-        </ComboBox>
-        <ComboBox Grid.Column="2" Grid.Row="0" Canvas.Left="55" Margin="0" Canvas.Top="246" Width="120" Name="com_county">
-            <ComboBox.ItemTemplate >
-                <DataTemplate>
-                    <TextBlock  Text="{Binding Converter={StaticResource dataConverter}}"></TextBlock>
-                </DataTemplate>
-            </ComboBox.ItemTemplate>
-        </ComboBox>
-        <TextBox Grid.Row="1" Grid.ColumnSpan="3" BorderThickness="0,0,0,1" VerticalAlignment="Bottom" Margin="6,0,0,0" Name="address">
-            <TextBox.BorderBrush>
-                <LinearGradientBrush EndPoint="0,20" MappingMode="Absolute" StartPoint="0,0">
-                    <GradientStop Color="#FFABADB3" Offset="0.05"/>
-                    <GradientStop Color="#FFE2E3EA" Offset="0.07"/>
-                    <GradientStop Color="#FF333333" Offset="1"/>
-                </LinearGradientBrush>
-            </TextBox.BorderBrush>
-            <TextBox.Background>
-                <SolidColorBrush Color="White" Opacity="0"/>
-            </TextBox.Background>
-        </TextBox>
+        <StackPanel Orientation="Horizontal"  Height="36">
+            <pu:TextBlockX  Width="66" Height="18" Margin="42 0 0 0" MatchText="*"  MatchedForeground="Red" Text="*所在地区"  FontSize="14"></pu:TextBlockX>
+            <ComboBox Width="140" DisplayMemberPath="name" Height="36" Margin="11 0 0 0" pu:ComboBoxHelper.Watermark="选择省份/地区" pu:ComboBoxHelper.CornerRadius="4" SelectionChanged="com_province_SelectionChanged_1"   Name="com_province">
+
+            </ComboBox>
+            <ComboBox Width="100" Height="36" Margin="10 0 0 0" pu:ComboBoxHelper.Watermark="选择城市" pu:ComboBoxHelper.CornerRadius="4" SelectionChanged="com_city_SelectionChanged_1"  Name="com_city">
+    
+            </ComboBox>
+            <ComboBox Width="126" Height="36" Margin="10 0 0 0" pu:ComboBoxHelper.Watermark="选择区/县" pu:ComboBoxHelper.CornerRadius="4" Name="com_county">
+      
+            </ComboBox>
+            <ComboBox Width="140" Height="36" Margin="10 0 0 0" pu:ComboBoxHelper.Watermark="选择街道" pu:ComboBoxHelper.CornerRadius="4" Name="com_street" >
+             
+            </ComboBox>
+            <ComboBox Width="126" Height="36" Margin="10 0 0 0" pu:ComboBoxHelper.Watermark="选择小区" pu:ComboBoxHelper.CornerRadius="4" Name="com_village" >
+            
+            </ComboBox>
+           
+
+            <TextBox Grid.Row="1" Grid.ColumnSpan="3" BorderThickness="0,0,0,1" VerticalAlignment="Bottom" Margin="6,0,0,0" Name="address">
+                <TextBox.BorderBrush>
+                    <LinearGradientBrush EndPoint="0,20" MappingMode="Absolute" StartPoint="0,0">
+                        <GradientStop Color="#FFABADB3" Offset="0.05"/>
+                        <GradientStop Color="#FFE2E3EA" Offset="0.07"/>
+                        <GradientStop Color="#FF333333" Offset="1"/>
+                    </LinearGradientBrush>
+                </TextBox.BorderBrush>
+                <TextBox.Background>
+                    <SolidColorBrush Color="White" Opacity="0"/>
+                </TextBox.Background>
+            </TextBox>
+        </StackPanel>
+        
+        
     </Grid>
 </UserControl>

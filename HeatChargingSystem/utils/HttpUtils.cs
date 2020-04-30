@@ -19,7 +19,7 @@ namespace HeatChargingSystem.utils
         /// <returns></returns>
         public static string PostRequest(string url, string source, string token="")
         {
-            byte[] data = Encoding.UTF8.GetBytes(source); ;
+            byte[] data = Encoding.UTF8.GetBytes(source); 
 
             WebClient webClient = new WebClient();
             try
@@ -143,11 +143,11 @@ namespace HeatChargingSystem.utils
         /// <param name="requestEncode">请求的编码</param>  
         /// <param name="responseEncode">响应的编码</param>  
         /// <returns>响应的结果</returns>  
-        public static String GetRequest(String requestUrl, String requestEncode, String responseEncode,string token="")
+      
+
+        public static String GetRequest(String requestUrl, string token = "")
         {
-            String url = requestUrl.Substring(0, requestUrl.LastIndexOf('?'));
-            String queryString = requestUrl.Substring(requestUrl.LastIndexOf('?') + 1); ;
-            byte[] data = Encoding.GetEncoding(requestEncode.ToUpper()).GetBytes(queryString); ;
+
             WebClient webClient = new WebClient();
             webClient.Headers.Add("Content-Type", "application/json;charset=UTF-8");
             if (!string.IsNullOrEmpty(token))
@@ -157,9 +157,10 @@ namespace HeatChargingSystem.utils
             try
             {
                 //得到返回字符流  
-                byte[] responseData = webClient.UploadData(url, "GET", data);
+                byte[] responseData = webClient.DownloadData(requestUrl);
                 //解码  
-                String responseString = Encoding.GetEncoding(responseEncode.ToUpper()).GetString(responseData);
+                //String responseString = Encoding.GetEncoding(responseEncode.ToUpper()).GetString(responseData);
+                String responseString = Encoding.UTF8.GetString(responseData);
                 return responseString;
             }
             catch (WebException ex)
@@ -181,11 +182,8 @@ namespace HeatChargingSystem.utils
                         break;
                     }
                 }
-                return ex.Message + "\r\n\r\n" + Encoding.GetEncoding(responseEncode.ToUpper()).GetString(buf, 0, count);
+                return ex.Message + "\r\n\r\n" + Encoding.UTF8.GetString(buf, 0, count);
             }
         }
-
-
-
     }
 }

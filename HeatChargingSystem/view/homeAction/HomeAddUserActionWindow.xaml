@@ -58,12 +58,14 @@
         <Grid Grid.Row="4">
             <StackPanel Orientation="Horizontal"  Height="36">
                 <local:DictrictControl x:Name="District" />
+              <!--  
                 <pu:TextBlockX Width="66" Height="18" Margin="42 0 0 0" MatchText="*"  MatchedForeground="Red" Text="*所在地区"  FontSize="14"></pu:TextBlockX>
                 <ComboBox Width="140" Height="36" Margin="11 0 0 0" pu:ComboBoxHelper.Watermark="选择省份/地区" pu:ComboBoxHelper.CornerRadius="4"></ComboBox>
                 <ComboBox Width="100" Height="36" Margin="10 0 0 0" pu:ComboBoxHelper.Watermark="选择城市" pu:ComboBoxHelper.CornerRadius="4"></ComboBox>
                 <ComboBox Width="126" Height="36" Margin="10 0 0 0" pu:ComboBoxHelper.Watermark="选择区/县" pu:ComboBoxHelper.CornerRadius="4"></ComboBox>
                 <ComboBox Width="140" Height="36" Margin="10 0 0 0" pu:ComboBoxHelper.Watermark="选择街道" pu:ComboBoxHelper.CornerRadius="4"></ComboBox>
                 <ComboBox Width="126" Height="36" Margin="10 0 0 0" pu:ComboBoxHelper.Watermark="选择小区" pu:ComboBoxHelper.CornerRadius="4"></ComboBox>
+                -->
             </StackPanel>
         </Grid>
         <Grid Grid.Row="5">

@@ -107,4 +107,18 @@ namespace HeatChargingSystem.model.response
 
         }
     }
+    public class controller_type
+    {
+        public string dicType { get; set; }
+        public string dicTypeName { get; set; }
+        public string id { get; set; }
+        public string name { get; set; }
+        public controller_type(string dicType, string dicTypeName, string i,string name)
+        {
+            this.dicType = dicType;
+            this.dicTypeName = dicTypeName;
+            this.id = id;
+            this.name = name;
+        }
+    }
 }

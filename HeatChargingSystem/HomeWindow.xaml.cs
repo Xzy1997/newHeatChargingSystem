@@ -305,11 +305,16 @@ namespace HeatChargingSystem
             RequestUserModel request = new RequestUserModel();
             request.name = name;
             request.controllerCode = doorid;
+            if(this.status.SelectedIndex!=-1)
             request.status = status.ToString();
             List<ResponseUserInfoModel> response = new ApiImpl().SearchUser(request);
             if (response != null)
             {
-            System.Windows.MessageBox.Show(response.ToString(), "系统提示", System.Windows.MessageBoxButton.OK, System.Windows.MessageBoxImage.Information);
+                foreach(var i in response)
+                {
+                    System.Windows.MessageBox.Show(i.id, "系统提示", System.Windows.MessageBoxButton.OK, System.Windows.MessageBoxImage.Information);
+                }
+           
             this.dataGrid.ItemsSource = response;
             }
             else

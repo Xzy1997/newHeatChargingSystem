@@ -39,14 +39,16 @@ namespace HeatChargingSystem.api
             throw new NotImplementedException();
         }
 
-        public Dictionary<int, string> GetAllDictionary()
+        public List<controller_type> GetAllDictionary()
         {
             try
             {
-                string result = HttpUtils.GetRequest(AppConfigMoel.URL + ConstantsValue.HTTP_GETD_RUI, "UTF8", "UTF8", AppConfigMoel.token);
-                Console.WriteLine(result);
-                Dictionary<int, string> jsonDict = JsonConvert.DeserializeObject<Dictionary<int, string>>(result);               
-                return jsonDict;
+                string result = HttpUtils.GetRequest(AppConfigMoel.URL + ConstantsValue.HTTP_GETREGION_RUI, AppConfigMoel.token);
+                //Console.WriteLine(result);
+                BaseResponseModel responseModel = JsonConvert.DeserializeObject<BaseResponseModel>(result);
+                var arrdata = Newtonsoft.Json.Linq.JArray.Parse(responseModel.data.ToString());
+                List<controller_type> obj2 = arrdata.ToObject<List<controller_type>>();            
+                return obj2;
             }
             catch (Exception)
             {
@@ -65,9 +67,23 @@ namespace HeatChargingSystem.api
             throw new NotImplementedException();
         }
 
-        public void GetRegion()
+        public List<controller_type> GetRegion( string level,string pid)
         {
-            throw new NotImplementedException();
+            try
+            {
+
+                string result = HttpUtils.GetRequest(AppConfigMoel.URL + ConstantsValue.HTTP_GETD_RUI, AppConfigMoel.token);
+                Console.WriteLine(result);
+                BaseResponseModel responseModel = JsonConvert.DeserializeObject<BaseResponseModel>(result);
+                var arrdata = Newtonsoft.Json.Linq.JArray.Parse(responseModel.data.ToString());
+                List<controller_type> obj2 = arrdata.ToObject<List<controller_type>>();
+                return obj2;
+            }
+            catch (Exception)
+            {
+
+                return null;
+            }
         }
 
         public List<ResponseUserInfoModel> GetUserList(int pageSize, int pageNum)
@@ -116,7 +132,10 @@ namespace HeatChargingSystem.api
         {
             try
             {
-                string result = HttpUtils.PostRequest(AppConfigMoel.URL + ConstantsValue.HTTP_SEARCH_USER_RUI, JsonConvert.SerializeObject(request));
+                string url = AppConfigMoel.URL + ConstantsValue.HTTP_SEARCH_USER_RUI;
+                string str = url+"?name={0}&controllerCode={1}&payStatus={2}";
+                 str = String.Format(str, request.name, request.controllerCode, request.status);
+                string result = HttpUtils.GetRequest(str, AppConfigMoel.token);
                 BaseResponseModel responseModel = JsonConvert.DeserializeObject<BaseResponseModel>(result);
                 if (responseModel != null)
                 {

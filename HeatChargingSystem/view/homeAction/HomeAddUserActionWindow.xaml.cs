@@ -54,32 +54,18 @@ namespace HeatChargingSystem.view.homeAction
        //0 民用；1商用；2：共建；3：其他类型
         private void HomeAddUserActionWindow_Loaded(object sender, RoutedEventArgs e)
         {
-            List<controllerType1> list = new List<controllerType1>();
-            list.Add(new controllerType1(0, "xx阀"));
-            list.Add(new controllerType1(1, "xx阀"));
-            list.Add(new controllerType1(2, "xx阀"));
-            this.controllerType.ItemsSource = list;
+
+            List<userType> list = new List<userType>();
+            list.Add(new userType(0, "民用"));
+            list.Add(new userType(1, "商用"));
+            list.Add(new userType(2, "共建"));
+            list.Add(new userType(3, "其他类型"));
+            this.usertype.ItemsSource = list;
 
 
-            //List<userType> list1 = new List<userType>();
-            //list1.Add(new userType(0, "民用"));
-            //list1.Add(new userType(1, "商用"));
-            //list1.Add(new userType(2, "共建"));
-            //list1.Add(new userType(3, "其他类型"));
-            //this.usertype.ItemsSource = list1;
-            Dictionary<int, string> response = new ApiImpl().GetAllDictionary();
-            List < userType > list1 = new List<userType>();
-            if (response != null)
-            {
-                foreach (var i in response)
-                {
-                    userType x = new userType(i.Key, i.Value);
-                    list1.Add(x);
-                }
-            }
-           
 
-            this.usertype.ItemsSource = list1;
+           // List<controller_type> response = new ApiImpl().GetAllDictionary();      
+           // this.controllerType.ItemsSource = response;
 
         }
 
@@ -106,15 +92,15 @@ namespace HeatChargingSystem.view.homeAction
             request.unit = unit;
             request.room = room;
 
-            request.hourseCode = "11";
-            request.provice = "11";
-            request.city = "11"; ;
-            request.county = "11"; ;
-            request.street = "11"; ;
-            request.village = "11"; ;
+            request.hourseCode = "1231";
+            request.provice = "浙江";
+            request.city = "杭州"; ;
+            request.county = "滨江"; ;
+            request.street = "浦沿"; ;
+            request.village = "新村"; ;
 
             BaseResponseModel response = new ApiImpl().AddUser(request);
-            if (response != null)
+            if (response != null&&response.code=="200")
             {
                 //System.Windows.MessageBox.Show("添加成功", "系统提示", System.Windows.MessageBoxButton.OK, System.Windows.MessageBoxImage.Information);
                 System.Windows.MessageBox.Show(response.msg.ToString(), "系统提示", System.Windows.MessageBoxButton.OK, System.Windows.MessageBoxImage.Information);
