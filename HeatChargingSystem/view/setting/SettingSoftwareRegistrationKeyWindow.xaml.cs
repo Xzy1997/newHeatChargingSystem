@@ -73,7 +73,10 @@ namespace HeatChargingSystem.view
 
             }
         }
-       
+        private void CloseWindowEventBtnClick(object sender, System.Windows.RoutedEventArgs e)
+        {
+            System.Environment.Exit(0);
+        }
         /// <summary>
         /// 获取公钥
         /// </summary>
@@ -141,6 +144,11 @@ namespace HeatChargingSystem.view
                 MessageBox.Show(ex.ToString());
             }
             return guid.Replace(" ", "");
+        }
+
+        private void exit(object sender, RoutedEventArgs e)
+        {
+            System.Environment.Exit(0);
         }
     }
 }
