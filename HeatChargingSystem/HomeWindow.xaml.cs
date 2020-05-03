@@ -14,6 +14,7 @@ using System.Management;
 using System.Windows;
 using System.Windows.Documents;
 using System.Windows.Media.Imaging;
+using System.Windows.Threading;
 using System.Xml;
 
 namespace HeatChargingSystem
@@ -31,11 +32,22 @@ namespace HeatChargingSystem
 
         private void HomeWindow_Loaded(object sender, RoutedEventArgs e)
         {
-         
-           
+           // date.SetValue
+            timer = new DispatcherTimer();
+            timer.Interval = TimeSpan.FromSeconds(1);
+            timer.Tick += new EventHandler(timer_Tick);
+            timer.Start();
             this.DataContext = new HomeViewModel();
         }
 
+        private DispatcherTimer timer;
+
+
+        void timer_Tick(object sender, EventArgs e)
+        {
+
+            this.time.Text = DateTime.Now.ToString("T");
+        }
 
         ResponseUserInfoModel userInfoModel;
 

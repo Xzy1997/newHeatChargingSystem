@@ -52,8 +52,8 @@
                     <Label Margin="14,20,0,10" Content="上次防盗警报时间"></Label>
                     <ComboBox Width="150" Height="30"></ComboBox>
                     <Label Margin="14,20,0,10" Content="当前时间" ></Label>
-                    <pu:DateTimePicker Height="30" Width="150"></pu:DateTimePicker>
-                    <pu:DateTimePicker DateTimePickerMode="Time" Height="30" Width="150" Margin="0,10,0,0"></pu:DateTimePicker>
+                    <pu:DateTimePicker Name="date" Height="30" Width="150"></pu:DateTimePicker>
+                    <pu:DateTimePicker x:Name="time" DateTimePickerMode="Time" Text="{Binding TextProperty1, UpdateSourceTrigger=PropertyChanged}" Height="30" Width="150" Margin="0,10,0,0"></pu:DateTimePicker>
                 </StackPanel>
             </ScrollViewer>
 
