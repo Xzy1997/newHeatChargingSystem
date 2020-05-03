@@ -12,5 +12,14 @@ namespace HeatChargingSystem
     {
         public static string URL = AppConfigUtils.ReadSetting("APP_URI");
         public static string token = string.Empty;
+        public static string ComPortName = AppConfigUtils.ReadSetting("Com_Port");
+
+        /// <summary>
+        /// 清除缓存
+        /// </summary>
+        public static void ClearCache()
+        {
+            token = string.Empty;
+        }
     }
 }

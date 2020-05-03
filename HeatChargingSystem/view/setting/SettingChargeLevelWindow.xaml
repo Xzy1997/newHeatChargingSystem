@@ -7,6 +7,7 @@
         xmlns:pu="clr-namespace:Panuon.UI.Silver;assembly=Panuon.UI.Silver"
         pu:WindowStartupLocation="CenterScreen"
         Style="{StaticResource DialogWindow}"
+            Loaded="WindowX_Loaded"
         mc:Ignorable="d"
         Title="AddSecretKeyWindow" Height="320" Width="440" MinHeight="320" MinWidth="440">
     <pu:WindowXCaption.Header>
@@ -21,21 +22,21 @@
     </pu:WindowXCaption.Header>
     <DockPanel>
         <StackPanel DockPanel.Dock="Bottom" Margin="0,0,0,20" Orientation="Horizontal" HorizontalAlignment="Center" VerticalAlignment="Center">
-            <Button Height="36" Width="100" Content="确定" Background="#125AD9"></Button>
-            <Button Margin="14,0,0,0" Height="36" Width="100" pu:ButtonHelper.ButtonStyle="Outline" pu:ButtonHelper.CornerRadius="4" Content="取消"></Button>
+            <Button Click="UpdateCahrgeStandardEvent" Height="36" Width="100" Content="确定" Background="#125AD9"></Button>
+            <Button Click="CancleEvent" Margin="14,0,0,0" Height="36" Width="100" pu:ButtonHelper.ButtonStyle="Outline" pu:ButtonHelper.CornerRadius="4" Content="取消"></Button>
         </StackPanel>
-        <StackPanel Orientation="Vertical">
+        <StackPanel Orientation="Vertical" VerticalAlignment="Center">
             <StackPanel Orientation="Horizontal" Margin="0,20,0,0">
                 <Label Margin="20,0,0,0" Content="收费标准" VerticalAlignment="Center"></Label>
-                <TextBox Margin="15,0,0,0" Height="36" Width="200"></TextBox>
-                <Label Margin="7,0,0,0" Content="(每元/每天/每平方)" VerticalAlignment="Center"></Label>
+                <TextBox x:Name="ChargeStandard" Margin="15,0,0,0" Height="36" Width="200"></TextBox>
+                <Label  Margin="7,0,0,0" Content="(每元/每天/每平方)" VerticalAlignment="Center"></Label>
             </StackPanel>
             <StackPanel Orientation="Horizontal" Margin="0,30,0,0">
                 <Label Margin="20,0,0,0" Content="收费天数" VerticalAlignment="Center"></Label>
-                <TextBox Margin="15,0,0,0" Height="36" Width="200"></TextBox>
+                <TextBox x:Name="ChargeDays" Margin="15,0,0,0" Height="36" Width="200"></TextBox>
                 <Label Margin="7,0,0,0" Content="(每年默认供暖天数)" VerticalAlignment="Center"></Label>
             </StackPanel>
         </StackPanel>
-       
+
     </DockPanel>
 </pu:WindowX>

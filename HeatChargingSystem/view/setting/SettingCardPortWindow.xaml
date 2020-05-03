@@ -6,6 +6,7 @@
         xmlns:local="clr-namespace:HeatChargingSystem.view"
         xmlns:pu="clr-namespace:Panuon.UI.Silver;assembly=Panuon.UI.Silver"
         pu:WindowStartupLocation="CenterScreen"
+            Loaded="WindowX_Loaded"
         Style="{StaticResource DialogWindow}"
         mc:Ignorable="d"
         Title="AddSecretKeyWindow" Height="320" Width="440" MinHeight="320" MinWidth="440">
@@ -21,12 +22,12 @@
     </pu:WindowXCaption.Header>
     <DockPanel>
         <StackPanel DockPanel.Dock="Bottom" Margin="0,0,0,20" Orientation="Horizontal" HorizontalAlignment="Center" VerticalAlignment="Center">
-            <Button Height="36" Width="100" Content="确定" Background="#125AD9"></Button>
+            <Button Click="SaveComPortEvent" Height="36" Width="100" Content="确定" Background="#125AD9"></Button>
             <Button Margin="14,0,0,0" Height="36" Width="100" pu:ButtonHelper.ButtonStyle="Outline" pu:ButtonHelper.CornerRadius="4" Content="取消"></Button>
         </StackPanel>
         <StackPanel Orientation="Vertical" >
             <Label Margin="41,41,0,0" Content="读写器串口号"></Label>
-            <ComboBox Margin="0,13,0,0" Height="36" Width="357" pu:ComboBoxHelper.CornerRadius="4"></ComboBox>
+            <ComboBox x:Name="comPort" Margin="0,13,0,0" Height="36" Width="357" pu:ComboBoxHelper.CornerRadius="4"></ComboBox>
         </StackPanel>
     </DockPanel>
 </pu:WindowX>

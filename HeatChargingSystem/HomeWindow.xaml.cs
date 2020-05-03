@@ -1,15 +1,20 @@
 ﻿using HeatChargingSystem.api;
+using HeatChargingSystem.model;
 using HeatChargingSystem.model.request;
 using HeatChargingSystem.model.response;
+using HeatChargingSystem.utils;
 using HeatChargingSystem.view;
 using HeatChargingSystem.view.homeAction;
 using Panuon.UI.Silver;
 using System;
 using System.Collections.Generic;
 using System.Drawing;
+using System.IO;
+using System.Management;
 using System.Windows;
 using System.Windows.Documents;
 using System.Windows.Media.Imaging;
+using System.Xml;
 
 namespace HeatChargingSystem
 {
@@ -26,12 +31,11 @@ namespace HeatChargingSystem
 
         private void HomeWindow_Loaded(object sender, RoutedEventArgs e)
         {
-            List<pay_status> list = new List<pay_status>();
-            list.Add(new pay_status(0, "未缴费"));
-            list.Add(new pay_status(1, "已经缴费"));
-            list.Add(new pay_status(2, "不需要"));
-            this.status.ItemsSource = list;
+         
+           
+            this.DataContext = new HomeViewModel();
         }
+
 
         ResponseUserInfoModel userInfoModel;
 
@@ -280,7 +284,6 @@ namespace HeatChargingSystem
         /// <param name="e"></param>
         private void ClearCardEventBtnClick(object sender, System.Windows.RoutedEventArgs e)
         {
-
         }
 
         /// <summary>
@@ -291,34 +294,14 @@ namespace HeatChargingSystem
         private void AccountLogoutEventBtnClick(object sender, System.Windows.RoutedEventArgs e)
         {
             Login window = new Login();
+            AppConfigMoel.ClearCache();
             window.Show();
             this.Close();
         }
 
-     
-
-        private void search_btn(object sender, System.Windows.RoutedEventArgs e)
+        private void dataGrid_LoadingRow(object sender, System.Windows.Controls.DataGridRowEventArgs e)
         {
-            var name = this.userName.Text.Trim();
-            var doorid = this.doorId.Text.Trim();
-            var status = this.status.SelectedIndex;
-            RequestUserModel request = new RequestUserModel();
-            request.name = name;
-            request.controllerCode = doorid;
-            if(this.status.SelectedIndex!=-1)
-            request.status = status.ToString();
-            List<ResponseUserInfoModel> response = new ApiImpl().SearchUser(request);
-            if (response != null)
-            {
-                foreach(var i in response)
-                {
-                    System.Windows.MessageBox.Show(i.id, "系统提示", System.Windows.MessageBoxButton.OK, System.Windows.MessageBoxImage.Information);
-                }
-           
-            this.dataGrid.ItemsSource = response;
-            }
-            else
-                System.Windows.MessageBox.Show("无数据", "系统提示", System.Windows.MessageBoxButton.OK, System.Windows.MessageBoxImage.Information);
+            e.Row.Header = e.Row.GetIndex() + 1;
         }
     }
 }

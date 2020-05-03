@@ -1,4 +1,6 @@
-﻿using System;
+﻿using GalaSoft.MvvmLight;
+using Newtonsoft.Json;
+using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
@@ -9,25 +11,37 @@ namespace HeatChargingSystem.model.request
     /// <summary>
     /// 用户查询参数
     /// </summary>
-    public class RequestUserModel
+    public class RequestUserModel : ObservableObject
     {
         public RequestUserModel()
         {
-            controllerCode = "";
-            name = "";
-            status = "";
         }
         /// <summary>
         /// 阀门序列号
         /// </summary>
-        public string controllerCode { get; set; }
+        private string controllerCode;
         /// <summary>
         /// 用户名
         /// </summary>
-        public string name { get; set; }
+        private string name;
         /// <summary>
         /// 缴费状态
         /// </summary>
-        public string status { get; set; }
+        private int payStatus;
+        /// <summary>
+        /// /阀门序列号
+        /// </summary>
+        [JsonProperty("controllerCode")]
+        public string ControllerCode { get => controllerCode; set => controllerCode = value; }
+        /// <summary>
+        /// 用户名
+        /// </summary>
+        [JsonProperty("name")]
+        public string Name { get => name; set => name = value; }
+        /// <summary>
+        /// 缴费状态
+        /// </summary>
+        [JsonProperty("status")]
+        public int PayStatus { get => payStatus; set => payStatus = value; }
     }
 }

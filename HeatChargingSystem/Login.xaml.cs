@@ -14,6 +14,9 @@ using System.Windows.Controls;
 using System.Windows.Data;
 using System.Xml.Serialization;
 using HeatChargingSystem.model;
+using System.Xml;
+using System.Management;
+using HeatChargingSystem.view;
 
 namespace HeatChargingSystem
 {
@@ -113,8 +116,202 @@ namespace HeatChargingSystem
                     break;
             }
         }
+
+        string fullFilePath;
+        private FileInfo InfoFile
+        {
+            get
+            {
+                return new FileInfo(fullFilePath);
+            }
+        }
+        string RegistrationKeyfullFilePath;
+        private FileInfo RegistrationKey
+        {
+            get
+            {
+                return new FileInfo(RegistrationKeyfullFilePath);
+            }
+        }
+        /// <summary>
+        /// 写入公钥文本流
+        /// </summary>
+        private void writePublicKey()
+        {
+            fullFilePath = System.AppDomain.CurrentDomain.SetupInformation.ApplicationBase;
+            fullFilePath += "pubkey.xml";
+            if (InfoFile.Exists)
+            {
+                return;
+            }
+            string pubkey = "<RSAKeyValue><Modulus>6HChoJt19leSSHhf5zntrRufitNgVEjxgVCA6iEtml6q92saO0rbOhWsgURgMVsv/onsf30+ysLVHCzUQzibTS/+wF6e9b20AKHFTszUDQYfKXbUjf3kNzhHs7+OKt7uiimcCaiUlkTUe1kcmiq1FK+QrfLDZmeVkJWkoHRBjF0=</Modulus><Exponent>AQAB</Exponent></RSAKeyValue>";
+            XmlDocument doc = new XmlDocument();
+            doc.LoadXml(pubkey);
+            doc.Save("pubkey.xml");
+
+
+        }
+        /// <summary>
+        /// 获取公钥
+        /// </summary>
+        /// <returns></returns>
+        private string getPubkey()
+        {
+            string pubkey = string.Empty;
+            try
+            {
+
+                string path = string.Empty;
+                path = System.AppDomain.CurrentDomain.SetupInformation.ApplicationBase;
+                path += "pubkey.xml";
+
+                using (StreamReader sr = new StreamReader(path))
+                {
+                    string line = string.Empty;
+                    while ((line = sr.ReadLine()) != null)
+                    {
+                        pubkey += line;
+                    }
+                }
+            }
+            catch (Exception ex)
+            {
+                MessageBox.Show(ex.ToString());
+            }
+            return pubkey.Replace(" ", "");
+        }
+
+
+        /// <summary>
+        /// 获取GUID码
+        /// </summary>
+        /// <returns></returns>
+        private string getGUID()
+        {
+            string guid = string.Empty;
+            try
+            {
+                string fileName = "guid.txt";
+                using (StreamReader sr = new StreamReader(fileName))
+                {
+                    string line;
+
+                    while ((line = sr.ReadLine()) != null)
+                    {
+                        guid += line;
+                    }
+
+                }
+            }
+            catch (Exception ex)
+            {
+                MessageBox.Show(ex.ToString());
+            }
+            return guid.Replace(" ", "");
+        }
+        private string getRK()
+        {
+            string RegistrationKey = string.Empty;
+            try
+            {
+                string fileName = "RegistrationKey.txt";
+                using (StreamReader sr = new StreamReader(fileName))
+                {
+                    string line;
+
+                    while ((line = sr.ReadLine()) != null)
+                    {
+                        RegistrationKey += line;
+                    }
+
+                }
+            }
+            catch (Exception ex)
+            {
+                MessageBox.Show(ex.ToString());
+            }
+            return RegistrationKey.Replace(" ", "");
+        }
+        private int VerifySignature1(string RK)
+        {
+
+            using (RSACryptoServiceProvider rsa = new RSACryptoServiceProvider(1024))
+            {
+                //获取公钥
+                rsa.FromXmlString(getPubkey());
+                //获取并处理唯一特征值
+                byte[] source = ASCIIEncoding.ASCII.GetBytes(getGUID());
+
+                RSAPKCS1SignatureDeformatter decry = new RSAPKCS1SignatureDeformatter(rsa);
+                decry.SetHashAlgorithm("SHA1");
+
+                //格式化唯一特征值
+                SHA1Managed sha = new SHA1Managed();
+                byte[] arr = sha.ComputeHash(source);
+
+                try
+                {
+                    byte[] signed = Convert.FromBase64String(RK);
+                    if (decry.VerifySignature(arr, signed))
+                    {
+                        return 1;
+                    }
+                    else
+                    {
+                        return 0;
+                    }
+                }
+                catch (Exception)
+                {
+                    return 0;
+                }
+
+
+
+
+
+            }
+        }
         void LoginWindow_Loaded(object sender, RoutedEventArgs e)
         {
+            RegistrationKeyfullFilePath = System.AppDomain.CurrentDomain.SetupInformation.ApplicationBase;
+            RegistrationKeyfullFilePath += "RegistrationKey.txt";
+            if (!RegistrationKey.Exists)
+            {
+                string fileName = "guid.txt";
+                string version = System.Reflection.Assembly.GetExecutingAssembly().GetName().Version.ToString();
+                using (StreamWriter s = File.CreateText(fileName))
+                {
+                    string strMachineCode = string.Empty;
+                    string strCpu = string.Empty;
+                    string strDiskC = string.Empty;
+                    ManagementClass myCpu = new ManagementClass("win32_Processor");
+                    ManagementObjectCollection myCpuCollections = myCpu.GetInstances();
+                    foreach (ManagementObject obj in myCpuCollections)
+                    {
+                        strCpu = obj.Properties["Processorid"].Value.ToString();
+                    }
+
+                    ManagementObject disk = new ManagementObject("win32_logicaldisk.deviceid=\"c:\"");
+                    strDiskC = disk.GetPropertyValue("VolumeSerialNumber").ToString();
+
+
+                    strMachineCode = strCpu + strDiskC + version;
+                    s.WriteLine(strMachineCode.Trim());
+                    s.Close();
+
+                }
+                writePublicKey();
+                SettingSoftwareRegistrationKeyWindow window = new SettingSoftwareRegistrationKeyWindow();
+                this.IsMaskVisible = true;
+                window.ShowDialog();
+                this.IsMaskVisible = false;
+            }
+            else
+            {
+                string rk=getRK();
+                VerifySignature1(rk);
+            }
             _viewmodel = new LoginViewModel();
             this.DataContext = _viewmodel;
 
@@ -212,6 +409,24 @@ namespace HeatChargingSystem
         {
            // AccountNmaeTxt.Items.Clear();???
             PwdTxt.Clear();
+            string appStartPath = System.IO.Path.GetDirectoryName(System.Diagnostics.Process.GetCurrentProcess().MainModule.FileName);
+            StringBuilder builder = new StringBuilder();
+            builder.Append(appStartPath);
+            builder.Append("\\LoginFile\\");
+            builder.Append("\\XML\\");
+            System.IO.DirectoryInfo directoryInfo = new DirectoryInfo(builder.ToString());
+            if (!directoryInfo.Exists)
+            {
+                return;
+            }
+            builder.Append("LoginInfoXml.xml");
+            this.fullFilePath = builder.ToString();
+            if (InfoFile.Exists)
+            {
+                InfoFile.Delete();
+            }
+            listUserInfo.Clear();
+            this.AccountNmaeTxt.ItemsSource = listUserInfo;
         }
         /// <summary>
         /// 用户类用于保存记录

@@ -7,7 +7,7 @@ using System.Text;
 
 namespace HeatChargingSystem.model
 {
-    public class ViewModelBase : INotifyPropertyChanged
+    public class BaseViewModel : INotifyPropertyChanged
     {
         public event PropertyChangedEventHandler PropertyChanged;
         //protected bool SetProperty<T>(ref T storage, T value, [CallerMemberName] string propertyName = null) {

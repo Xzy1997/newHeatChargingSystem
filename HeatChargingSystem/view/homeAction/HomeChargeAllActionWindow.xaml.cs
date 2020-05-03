@@ -1,4 +1,5 @@
-﻿using Panuon.UI.Silver;
+﻿using HeatChargingSystem.model;
+using Panuon.UI.Silver;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -11,6 +12,7 @@ using System.Windows.Documents;
 using System.Windows.Input;
 using System.Windows.Media;
 using System.Windows.Media.Imaging;
+using System.Windows.Media.TextFormatting;
 using System.Windows.Shapes;
 
 namespace HeatChargingSystem.view.homeAction
@@ -62,6 +64,11 @@ namespace HeatChargingSystem.view.homeAction
         private void SearchChargeAllInfoEvent(object sender, RoutedEventArgs e)
         {
 
+        }
+
+        private void WindowX_Loaded(object sender, RoutedEventArgs e)
+        {
+            this.DataContext = new ChargeAllViewModel();
         }
     }
 }

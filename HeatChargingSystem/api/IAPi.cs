@@ -1,4 +1,5 @@
-﻿using HeatChargingSystem.model.request;
+﻿using HeatChargingSystem.model;
+using HeatChargingSystem.model.request;
 using HeatChargingSystem.model.response;
 using System;
 using System.Collections.Generic;
@@ -19,19 +20,15 @@ namespace HeatChargingSystem.api
         /// <summary>
         /// 更改密码
         /// </summary>
-        BaseResponseModel ResetPwd();
+        BaseResponseModel ResetPwd(string oldPwd,string newPwd);
         /// <summary>
         /// 退出
         /// </summary>
         BaseResponseModel Logout();
         /// <summary>
-        /// 获取国家地区字典表
-        /// </summary>
-        List<Region> GetRegion(string level, string pid);
-        /// <summary>
         /// 获取所有字典信息
         /// </summary>
-        List<controller_type> GetAllDictionary();
+        List<ComboBoxModel> GetDictionary(string typeName);
 
         #region 用户操作接口
         /// <summary>
@@ -42,7 +39,7 @@ namespace HeatChargingSystem.api
         /// 获取所有用户信息
         /// </summary>
         /// <returns>所有用户列表</returns>
-        List<ResponseUserInfoModel> GetAllUserList();
+        List<ResponseUserInfoModel> GetAllUsers();
         /// <summary>
         /// 获取用户列表
         /// </summary>
@@ -52,7 +49,7 @@ namespace HeatChargingSystem.api
         /// <summary>
         /// 添加用户信息
         /// </summary>
-        BaseResponseModel AddUser(ResponseUserInfoModel request);
+        BaseResponseModel AddUser(ResponseUserInfoModel request) ;
         /// <summary>
         /// 删除用户
         /// </summary>
@@ -75,5 +72,37 @@ namespace HeatChargingSystem.api
         /// </summary>
         /// <returns></returns>
         BaseResponseModel GetCardOPerationLog();
+        /// <summary>
+        /// 获取省区域字典
+        /// </summary>
+        List<ComboBoxModel> GetProvinceRegion();
+        /// <summary>
+        /// 获取市地区信息
+        /// </summary>
+        List<ComboBoxModel> GetCityRegion(string id);
+        /// <summary>
+        /// 获取县/区地区信息
+        /// </summary>
+        List<ComboBoxModel> GetCountryRegion(string id);
+        /// <summary>
+        /// 获取街道地区信息
+        /// </summary>
+        List<ComboBoxModel> GetStreetRegion(string id);
+        /// <summary>
+        /// 获取小区域字典
+        /// </summary>
+        List<ComboBoxModel> GetVillageRegion(string id);
+        /// <summary>
+        /// 修改收费标准
+        /// </summary>
+        /// <param name="request"></param>
+        /// <returns></returns>
+        BaseResponseModel UpdateChargeStandar(RequestInformationModel request);
+        /// <summary>
+        /// 获取标准信息
+        /// 收费和供暖时间
+        /// </summary>
+        /// <returns></returns>
+        ResponseInformationModel GetInformation();
     }
 }

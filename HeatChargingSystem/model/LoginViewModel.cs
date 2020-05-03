@@ -11,7 +11,7 @@ using System.Windows.Media;
 
 namespace HeatChargingSystem.model
 {
-    public class LoginViewModel : ViewModelBase
+    public class LoginViewModel : BaseViewModel
     {
         #region 构造函数及登陆用户名及密码
 

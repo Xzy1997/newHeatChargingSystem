@@ -3,6 +3,8 @@
         xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
         xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
         xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+              xmlns:i="http://schemas.microsoft.com/expression/2010/interactivity"
+             Loaded="WindowX_Loaded"
         xmlns:local="clr-namespace:HeatChargingSystem.view"
         xmlns:pu="clr-namespace:Panuon.UI.Silver;assembly=Panuon.UI.Silver"
         pu:WindowStartupLocation="CenterScreen"
@@ -34,15 +36,61 @@
         <Grid Grid.Row="0">
             <StackPanel Orientation="Horizontal"  Height="36" VerticalAlignment="Bottom">
                 <Label Width="57" Height="18" Margin="25 0 0 0"  Content="地址选择"></Label>
-                <ComboBox Width="140" Height="36" Margin="10 0 0 0" pu:ComboBoxHelper.Watermark="选择省份/地区" pu:ComboBoxHelper.CornerRadius="4"></ComboBox>
+                <ComboBox ItemsSource="{Binding ProvicneCB,Mode=TwoWay}" SelectedItem="{Binding ComboBoxModel,Mode=TwoWay}"  DisplayMemberPath="Name" SelectedValuePath="Id" Width="140" Height="36" Margin="11 0 0 0" pu:ComboBoxHelper.Watermark="选择省份/地区" pu:ComboBoxHelper.CornerRadius="4">
+                    <i:Interaction.Triggers>
+                        <i:EventTrigger EventName = "SelectionChanged" >
+                            <i:InvokeCommandAction
+                             Command = "{Binding DataContext.ProvicneChangeCommand,RelativeSource={RelativeSource Mode=FindAncestor,AncestorType=ComboBox}}"
+                           CommandParameter="{Binding Path=SelectedItem,RelativeSource={RelativeSource Mode=FindAncestor,AncestorType=ComboBox}}" />
+                        </i:EventTrigger>
+                    </i:Interaction.Triggers>
+                </ComboBox>
+                <ComboBox ItemsSource="{Binding CityCB,Mode=TwoWay}" SelectedItem="{Binding ComboBoxModel,Mode=TwoWay}"   DisplayMemberPath="Name" SelectedValuePath="Id" Width="100" Height="36" Margin="10 0 0 0" pu:ComboBoxHelper.Watermark="选择城市" pu:ComboBoxHelper.CornerRadius="4">
+                    <i:Interaction.Triggers>
+                        <i:EventTrigger EventName = "SelectionChanged" >
+                            <i:InvokeCommandAction
+                             Command = "{Binding DataContext.CityChangeCommand,RelativeSource={RelativeSource Mode=FindAncestor,AncestorType=ComboBox}}"
+                           CommandParameter="{Binding Path=SelectedItem,RelativeSource={RelativeSource Mode=FindAncestor,AncestorType=ComboBox}}" />
+                        </i:EventTrigger>
+                    </i:Interaction.Triggers>
+                </ComboBox>
+                <ComboBox ItemsSource="{Binding ContoryCB,Mode=TwoWay}" SelectedItem="{Binding ComboBoxModel,Mode=TwoWay}"  DisplayMemberPath="Name" SelectedValuePath="Id" Width="126" Height="36" Margin="10 0 0 0" pu:ComboBoxHelper.Watermark="选择区/县" pu:ComboBoxHelper.CornerRadius="4">
+                    <i:Interaction.Triggers>
+                        <i:EventTrigger EventName = "SelectionChanged" >
+                            <i:InvokeCommandAction
+                             Command = "{Binding DataContext.ContoryChangeCommand,RelativeSource={RelativeSource Mode=FindAncestor,AncestorType=ComboBox}}"
+                           CommandParameter="{Binding Path=SelectedItem,RelativeSource={RelativeSource Mode=FindAncestor,AncestorType=ComboBox}}" />
+                        </i:EventTrigger>
+                    </i:Interaction.Triggers>
+                </ComboBox>
+                <ComboBox ItemsSource="{Binding StreetCB,Mode=TwoWay}" SelectedItem="{Binding ComboBoxModel,Mode=TwoWay}"  DisplayMemberPath="Name" SelectedValuePath="Id" Width="140" Height="36" Margin="10 0 0 0" pu:ComboBoxHelper.Watermark="选择街道" pu:ComboBoxHelper.CornerRadius="4">
+                    <i:Interaction.Triggers>
+                        <i:EventTrigger EventName = "SelectionChanged" >
+                            <i:InvokeCommandAction
+                             Command = "{Binding DataContext.StreetCommand,RelativeSource={RelativeSource Mode=FindAncestor,AncestorType=ComboBox}}"
+                           CommandParameter="{Binding Path=SelectedItem,RelativeSource={RelativeSource Mode=FindAncestor,AncestorType=ComboBox}}" />
+                        </i:EventTrigger>
+                    </i:Interaction.Triggers>
+                </ComboBox>
+                <ComboBox ItemsSource="{Binding VillageCB,Mode=TwoWay}" SelectedItem="{Binding ComboBoxModel,Mode=TwoWay}"  DisplayMemberPath="Name" SelectedValuePath="Id" Width="140" Height="36" Margin="10 0 0 0" pu:ComboBoxHelper.Watermark="选择小区" pu:ComboBoxHelper.CornerRadius="4">
+                    <i:Interaction.Triggers>
+                        <i:EventTrigger EventName = "SelectionChanged" >
+                            <i:InvokeCommandAction
+                             Command = "{Binding DataContext.VillageChangeCommand,RelativeSource={RelativeSource Mode=FindAncestor,AncestorType=ComboBox}}"
+                           CommandParameter="{Binding Path=SelectedItem,RelativeSource={RelativeSource Mode=FindAncestor,AncestorType=ComboBox}}" />
+                        </i:EventTrigger>
+                    </i:Interaction.Triggers>
+                </ComboBox>
+
+                <!--<ComboBox Width="140" Height="36" Margin="10 0 0 0" pu:ComboBoxHelper.Watermark="选择省份/地区" pu:ComboBoxHelper.CornerRadius="4"></ComboBox>
                 <ComboBox Width="100" Height="36" Margin="10 0 0 0" pu:ComboBoxHelper.Watermark="选择城市" pu:ComboBoxHelper.CornerRadius="4"></ComboBox>
                 <ComboBox Width="126" Height="36" Margin="10 0 0 0" pu:ComboBoxHelper.Watermark="选择区/县" pu:ComboBoxHelper.CornerRadius="4"></ComboBox>
                 <ComboBox Width="140" Height="36" Margin="10 0 0 0" pu:ComboBoxHelper.Watermark="选择街道" pu:ComboBoxHelper.CornerRadius="4"></ComboBox>
                 <ComboBox Width="140" Height="36" Margin="10 0 0 0" pu:ComboBoxHelper.Watermark="选择小区" pu:ComboBoxHelper.CornerRadius="4"></ComboBox>
-                <ComboBox Width="100" Height="36" Margin="10 0 0 0" pu:ComboBoxHelper.Watermark="楼号" pu:ComboBoxHelper.CornerRadius="4"></ComboBox>
-                <ComboBox Width="126" Height="36" Margin="10 0 0 0" pu:ComboBoxHelper.Watermark="单元" pu:ComboBoxHelper.CornerRadius="4"></ComboBox>
-                <ComboBox Width="100" Height="36" Margin="10 0 0 0" pu:ComboBoxHelper.Watermark="室号" pu:ComboBoxHelper.CornerRadius="4"></ComboBox>
-
+                -->
+                <TextBox Width="100" Height="36" Margin="10 0 0 0" pu:TextBoxHelper.Watermark="楼号" pu:TextBoxHelper.CornerRadius="4"></TextBox>
+                <TextBox Width="126" Height="36" Margin="10 0 0 0" pu:TextBoxHelper.Watermark="单元" pu:TextBoxHelper.CornerRadius="4"></TextBox>
+                <TextBox Width="100" Height="36" Margin="10 0 0 0" pu:TextBoxHelper.Watermark="室号" pu:TextBoxHelper.CornerRadius="4"></TextBox>
             </StackPanel>
         </Grid>
         <Grid Grid.Row="1">
@@ -52,16 +100,16 @@
                 <Label Width="41" Height="18" Margin="19 0 0 0" Content="供热站"></Label>
                 <ComboBox Width="140" Height="30" Margin="10 0 0 0"></ComboBox>
                 <Label Width="57" Height="18" Margin="19 0 0 0" Content="缴费状态"></Label>
-                <ComboBox Width="140" Height="30" Margin="10 0 0 0" ></ComboBox>
+                <ComboBox ItemsSource="{Binding ChargeCB}" DisplayMemberPath="Name" SelectedValuePath="Code" Width="140" Height="30" Margin="10 0 0 0" ></ComboBox>
                 <Button Margin="36 0 0 0" Width="100" Height="36" Content="确定" Click="SearchChargeAllInfoEvent" Background="#125AD9"></Button>
             </StackPanel>
         </Grid>
         <Grid Grid.Row="2">
             <StackPanel Orientation="Horizontal" VerticalAlignment="Bottom"  Height="36">
                 <Label Width="56" Height="18" Margin="24 0 0 0" Content="开始时间"></Label>
-                <pu:DateTimePicker Width="200" Height="36" Margin="15 0 0 0" ></pu:DateTimePicker>
+                <pu:DateTimePicker Width="200" Height="36" Margin="15 0 0 0" DateTimePickerMode="DateTime"></pu:DateTimePicker>
                 <Label Width="56" Height="18" Margin="16 0 0 0" Content="结束时间"></Label>
-                <pu:DateTimePicker Width="200" Height="36" Margin="12 0 0 0" ></pu:DateTimePicker>
+                <pu:DateTimePicker Width="200" Height="36" Margin="12 0 0 0" DateTimePickerMode="DateTime"></pu:DateTimePicker>
             </StackPanel>
         </Grid>
         <Grid Grid.Row="3">
