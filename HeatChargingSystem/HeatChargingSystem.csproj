@@ -50,7 +50,7 @@
     <WarningLevel>4</WarningLevel>
   </PropertyGroup>
   <PropertyGroup>
-    <ApplicationIcon>resources\logo.ico</ApplicationIcon>
+    <ApplicationIcon>20200503050341872_easyicon_net_64.ico</ApplicationIcon>
   </PropertyGroup>
   <PropertyGroup>
     <ManifestCertificateThumbprint>18E2BAEE8927CE9233ECC701EC81098619B6A6D7</ManifestCertificateThumbprint>
@@ -314,6 +314,9 @@
       <Generator>ResXFileCodeGenerator</Generator>
       <LastGenOutput>Resources.Designer.cs</LastGenOutput>
     </EmbeddedResource>
+    <Resource Include="20200503050341872_easyicon_net_64.ico" />
+    <Resource Include="20200503050659835_easyicon_net_96.ico" />
+    <Resource Include="20200503050943486_easyicon_net_256.ico" />
     <Content Include="NLog.config">
       <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
     </Content>

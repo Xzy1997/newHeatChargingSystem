@@ -152,7 +152,7 @@
                                 <Button Grid.Row="0" Style="{StaticResource helpButtonStyle}" Content="设置读写卡端口" Click="SettingCardPortEventBtnClick"></Button>
                                 <Button Grid.Row="1" Style="{StaticResource helpButtonStyle}" Content="收费站收费标准维护" Click="SettingChargeLevelBtnClick"></Button>
                                 <Button Grid.Row="2" Style="{StaticResource helpButtonStyle}" Content="修改默认收费开始日期" Click="SettingChargeTimeEventBtnClick"></Button>
-                                <Button Grid.Row="3" Style="{StaticResource helpButtonStyle}" Content="输入软件注册码" Click="SettingSoftWareRegistrationKeyEventBtnClick"></Button>
+                                <!--<Button Grid.Row="3" Style="{StaticResource helpButtonStyle}" Content="输入软件注册码" Click="SettingSoftWareRegistrationKeyEventBtnClick"></Button>-->
                                 <Button Grid.Row="4" Style="{StaticResource helpButtonStyle}" Content="更换阀门序列码" Click="SettingValveNumberEventBtnClick"></Button>
                                 <Button Grid.Row="5" Style="{StaticResource helpButtonStyle}" Content="输入用户授权(lis文件)" Click="SettingAuthorizationCodeEventBtnClick"></Button>
                                 <Button Grid.Row="6" Style="{StaticResource helpButtonStyle}" Content="数据库备份" Click="SqlBackupEventBtnClick"></Button>

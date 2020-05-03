@@ -45,6 +45,7 @@
         <Grid Grid.Row="1">
             <StackPanel Orientation="Horizontal" VerticalAlignment="Bottom">
                 <Button Margin="36 0 0 0" Width="80" Height="30" Content="读用户卡" FontSize="14"  pu:ButtonHelper.ClickStyle="Sink" pu:ButtonHelper.HoverBrush="#CD2990"	 pu:ButtonHelper.ButtonStyle="Standard" pu:ButtonHelper.CornerRadius="6" Background="#125AD9"></Button>
+                <!--#CCCCCC(灰色)-->
                 <Button Margin="20 0 0 0" Width="90" Height="30" Content="IC序列号卡" FontSize="14" pu:ButtonHelper.ClickStyle="Sink" pu:ButtonHelper.HoverBrush="#CD2990" pu:ButtonHelper.ButtonStyle="Standard" pu:ButtonHelper.CornerRadius="6" Background="#125AD9"></Button>
                 <Button Margin="20 0 0 0" Width="80" Height="30" Content="IC时间卡" FontSize="14" pu:ButtonHelper.ClickStyle="Sink" pu:ButtonHelper.HoverBrush="#CD2990" pu:ButtonHelper.ButtonStyle="Standard" pu:ButtonHelper.CornerRadius="6" Background="#125AD9"></Button>
                 <Button Margin="20 0 0 0" Width="80" Height="30" Content="IC复位卡" FontSize="14" pu:ButtonHelper.ClickStyle="Sink" pu:ButtonHelper.HoverBrush="#CD2990" pu:ButtonHelper.ButtonStyle="Standard" pu:ButtonHelper.CornerRadius="6" Background="#125AD9"></Button>
